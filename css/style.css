@@ -45,6 +45,24 @@ h1 {
 }
 
 .photographer_section article img {
-    height: 200px;
-    width: 200px;
+    height: 230px;
+    width: 230px;
+    transform: scale(2);
 }
+.card-container{ display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+    align-items: center;}
+.img-container{   
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 83px;
+    margin: 8rem;
+}
+.detail-container{ 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;}
