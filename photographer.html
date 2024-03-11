@@ -13,8 +13,16 @@
     </header>
     <main id="main">
       <div class="photograph-header">
+        <!-- template photographer.js -->
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+      <section>
+        <div><label for="menu-tri">Trier par</label><select name="menu-tri" id="select_tri">
+            <option value="Popularité">Popularité</option>
+            <option value="Date">Date</option>
+            <option value="Titre">Titre</option>
+          </select></div>
+      </section>
     </main>
     <div id="contact_modal">
 			<div class="modal">
@@ -31,7 +39,7 @@
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script src="/scripts/pages/controllers/photographes/photographer.js"></script>
+    <script src="/scripts/services/utils/contactForm.js"></script>
   </body>
 </html>

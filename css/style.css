@@ -3,6 +3,10 @@
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
+    max-width: 95%;
+height: auto;
+display: flex;
+flex-direction: column;
 }
 
 
@@ -58,8 +62,8 @@ h1 {
 .img-container{   
     border-radius: 50%;
     overflow: hidden;
-    padding: 83px;
-    margin: 8rem;
+    padding: 32%;
+    margin: auto;
 }
 .detail-container{ 
     display: flex;
