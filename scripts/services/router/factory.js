@@ -1,22 +1,20 @@
+import { ViewModel } from '../../models/photographesVm.js';
 import { init } from '../../pages/controllers/accueil/index.js';
 
-export class Factory {
-  static _pathName;
-  static _pathParams;
-  static _models;
-
-  static get pathName() {
-    return (Factory._pathName = location.pathname);
+//import { renderPage } from './../../pages/controllers/photographes/photographe.js';
+class Factory {
+  constructor() {}
+  get pathName() {
+    return location.pathname;
   }
-  static get pathParams() {
-    Factory._pathParams = history.state;
-    return Factory._pathParams;
+  get pathParams() {
+    return history.state;
   }
-  static get models() {
-    Factory._models;
+  get models() {
+    const vm = ViewModel.prototype.constructor.instanceVm;
     return {
-      photographers: Factory._models.getPhotographeList(),
-      medias: Factory._models.getMediaList(),
+      photographers: vm.getPhotographeList(),
+      medias: vm.getMediaList(),
     };
   }
   // static getDefaultPage(photographers) {
@@ -25,19 +23,24 @@ export class Factory {
   //   init(photographers);
   // }
 
-  static getPage() {
-    // Factory._pathName = Factory.pathName;
-    // Factory._pathParams = Factory._pathParams;
+  getPage() {
+    console.log('Inside Factory.getPage()');
     debugger;
-    const { photographers, medias } = Factory.models;
-    if (Factory.pathName === '/photographer.html') {
+    const { photographers, medias } = this.models;
+    if (this.pathName === '/photographer.html') {
       let photographer = photographers.find(
-        (ph) => ph.id == Factory.pathParams?.id && ph.name == Factory.pathParams.name
+        (ph) => ph.id == this.pathParams?.id && ph.name == this.pathParams.name
       );
       console.table(photographer, medias);
-    } else if (Factory.pathName === '/index.html' || Factory.pathName === '/') {
+
+      //  renderPage(photographer, medias);
+    } else if (this.pathName === '/index.html' || this.pathName === '/') {
       //page accueil
       init(photographers);
     }
   }
+}
+
+export function navigatePage() {
+  new Factory().getPage();
 }

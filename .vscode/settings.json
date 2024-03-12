@@ -1,3 +1,8 @@
 {
-  "cSpell.words": ["Localstorige"]
+  "cSpell.words": ["Localstorige"],
+  "liveServer.settings.multiRootWorkspaceName": "",
+  "liveServer.settings.root": "",
+  "liveServer.settings.port": 0,
+  "liveServer.settings.mount": [],
+  "javascript.preferences.importModuleSpecifierEnding": "js"
 }

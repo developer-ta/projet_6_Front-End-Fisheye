@@ -1,5 +1,3 @@
-import { Factory } from '../../services/router/factory.js';
-
 export function photographerTemplate(data) {
   const { name, portrait, city, tagline, price, country, id } = data;
 
@@ -18,15 +16,19 @@ export function photographerTemplate(data) {
 <p>${price}€/jour</p>
 </div>`;
     $article.innerHTML = html;
-    let $h2 = $article.querySelector('h2');
-    let $img = $article.querySelector('.img-container');
-    $img.addEventListener('click', (ev) => {
-      ev.preventDefault();
-      debugger;
-      history.pushState({ id: $article.id, name: $h2.textContent }, '', '/photographer.html');
-      console.log('$article: ', history.state);
-      Factory.getPage();
-    });
+
+    if (location.pathname === '/index.html' || location.pathname === '/') {
+      const $h2 = $article.querySelector('h2');
+      const $img = $article.querySelector('.img-container');
+      $img.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        debugger;
+        history.pushState({ id: $article.id, name: $h2.textContent }, '', '/photographer.html');
+        console.log('$article: ', history.state);
+        location.href = location.origin + location.pathname;
+        //Factory.getPage();
+      });
+    }
 
     return $article;
   }

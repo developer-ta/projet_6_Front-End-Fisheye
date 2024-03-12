@@ -12,16 +12,19 @@
       <img src="assets/images/logo.png" class="logo" />
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <!-- template photographer.js -->
+      <div class="photograph-header" id="profile">
+        <!-- template photographer.js -- (change name to index.js) -->
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
-      <section>
-        <div><label for="menu-tri">Trier par</label><select name="menu-tri" id="select_tri">
-            <option value="Popularité">Popularité</option>
+      <section id="menu">
+        <div>
+          <label for="menu-tri">Trier par</label>
+          <select name="menu-tri" id="select_tri">
+            <option value="Popularité" selected>Popularité</option>
             <option value="Date">Date</option>
             <option value="Titre">Titre</option>
-          </select></div>
+          </select>
+          </div>
       </section>
     </main>
     <div id="contact_modal">
@@ -38,8 +41,11 @@
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
-		</div>
-    <script src="/scripts/pages/controllers/photographes/photographer.js"></script>
+    </div>
+    <div id="lightbox">
+      <h2>name of photo</h2>
+    </div>
+    <script src="/scripts/pages/controllers/photographes/photographe.js" type="module"></script>
     <script src="/scripts/services/utils/contactForm.js"></script>
   </body>
 </html>
