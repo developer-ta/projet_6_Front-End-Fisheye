@@ -8,9 +8,9 @@ export const _ProfilePartiale = (data) => {
   const $div_profile = document.querySelector('#profile');
   $div_profile.appendChild($profileHtml);
   const $btn_contact = $div_profile.querySelector('.contact_button');
-  const $img = $div_profile.querySelector('img');
+  const $img_container = $div_profile.querySelector('.img-container');
   // position dom element
   //$div_profile.insertAdjacentElement('afterend', $img);
-  $img.insertAdjacentElement('beforebegin', $btn_contact);
+  $img_container.insertAdjacentElement('beforebegin', $btn_contact);
   $div_profile.appendChild($profileHtml).setAttribute('data-pageBuilded', 'true');
 };
