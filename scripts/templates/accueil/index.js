@@ -1,7 +1,7 @@
 export function photographerTemplate(data) {
   const { name, portrait, city, tagline, price, country, id } = data;
 
-  const picture = `/assets/Sample Photos/Photographers ID Photos/${portrait}`;
+  const picture = `/assets/Sample Photos/Photographers-ID-Photos/${portrait}`;
 
   function getUserCardDOM() {
     let $article = document.createElement('article');
@@ -23,10 +23,10 @@ export function photographerTemplate(data) {
       $img.addEventListener('click', (ev) => {
         ev.preventDefault();
         debugger;
-        history.pushState({ id: $article.id, name: $h2.textContent }, '', '/photographer.html');
+        history.pushState({ id: $article.id }, '', '/photographer.html');
         console.log('$article: ', history.state);
+        localStorage.setItem('id', `${$article.id}`);
         location.href = location.origin + location.pathname;
-        //Factory.getPage();
       });
     }
 

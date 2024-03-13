@@ -7,7 +7,7 @@ const initPage = (mediasData, photographer) => {
   debugger;
   const isPageBuilded = document.querySelector('#profile').dataset.pageBuilded;
   if (!isPageBuilded) {
-    pageBuilder(mediasData, photographer);
+  pageBuilder(mediasData, photographer);
   }
 };
 const updatePage = () => {};

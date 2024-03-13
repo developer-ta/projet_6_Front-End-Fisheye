@@ -8,32 +8,35 @@ class Factory {
     return location.pathname;
   }
   get pathParams() {
-    return history.state;
+    if (history.state && history.state.id) {
+      return history.state;
+    }
+    return localStorage.getItem('id');
   }
   get models() {
     const vm = ViewModel.prototype.constructor.instanceVm;
     return {
-      photographers: vm.getPhotographeList(),
-      medias: vm.getMediaList(),
+      photographers: ViewModel.prototype.getPhotographeList(),
+      medias: ViewModel.prototype.getMediaList(),
     };
   }
-  // static getDefaultPage(photographers) {
-  //   debugger;
-  //   //page accueil
-  //   init(photographers);
-  // }
 
   getPage() {
     console.log('Inside Factory.getPage()');
     debugger;
     const { photographers, medias } = this.models;
+
     if (this.pathName === '/photographer.html') {
-      let photographer = photographers.find(
-        (ph) => ph.id == this.pathParams?.id && ph.name == this.pathParams.name
-      );
+      let photographer = photographers.find((ph) => ph.id == this.pathParams);
       console.table(photographer, medias);
 
-      //  renderPage(photographer, medias);
+      if (photographer) {
+        //page photographer
+        initPage(photographer, medias);
+        return;
+      }
+
+      throw new Error(`Photographe  id = ${pathParams} existe pas !`);
     } else if (this.pathName === '/index.html' || this.pathName === '/') {
       //page accueil
       init(photographers);
