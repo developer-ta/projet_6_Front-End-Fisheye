@@ -1,8 +1,9 @@
 import { ViewModel } from '../../models/photographesVm.js';
 import { init } from '../../pages/controllers/accueil/index.js';
+import { initPage } from '../../pages/controllers/photographes/photographe.js';
 
 //import { renderPage } from './../../pages/controllers/photographes/photographe.js';
-class Factory {
+export class Factory {
   constructor() {}
   get pathName() {
     return location.pathname;
@@ -32,7 +33,7 @@ class Factory {
 
       if (photographer) {
         //page photographer
-        initPage(photographer, medias);
+        initPage(medias, photographer);
         return;
       }
 

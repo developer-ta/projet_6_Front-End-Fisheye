@@ -1,5 +1,5 @@
 export class ViewModel {
-  constructor({ photographers, media }) {
+  constructor ({ photographers, media }) {
     debugger;
     if (this.isExisteVm) {
       return ViewModel.instanceVm;
@@ -18,23 +18,25 @@ export class ViewModel {
     if (this._photographeList) {
       return this._photographeList;
     } else {
-      return this.getLocalStorage('photographeList') ? this.getLocalStorage('photographeList') : '';
+      this._photographeList = this.getLocalStorage('photographeList');
+      debugger;
+      return this._photographeList ?? '';
     }
   }
   getPhotographeById(id) {
     if (this._photographeList) {
-      return (this._photographe = this.photographeList.find((el) => el.id == id));
+      return (this._photographe = this._photographeList.find((el) => el.id == id));
     } else {
-      return this.getLocalStorage()
-        ? this.getLocalStorage().this.photographeList.find((el) => el.id == id)
-        : '';
+      let photographe = this.getLocalStorage(id);
+      return photographe ? this._photographeList.find((el) => el.id == id) : '';
     }
   }
   getMediaList() {
     if (this._media) {
       return this._media;
     } else {
-      return this.getLocalStorage('mediaList') ? this.getLocalStorage('mediaList') : '';
+      this._media = this.getLocalStorage('mediaList');
+      return this._media ?? '';
     }
   }
   setLocalStorage() {
