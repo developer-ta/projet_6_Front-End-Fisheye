@@ -1,7 +1,9 @@
-import { _ProfilePartiale } from './_photographerProfile.js';
+//import { _ProfilePartiale } from './_photographerProfile.js';
+
+import { _mainSection } from "./_photographerMain.js";
 
 export const pageBuilder = (MediasData, phData) => {
-  _ProfilePartiale(phData);
+  _mainSection(MediasData, phData)
 };
 
 /**
