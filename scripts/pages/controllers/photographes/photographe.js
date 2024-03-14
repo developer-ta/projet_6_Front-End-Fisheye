@@ -3,7 +3,7 @@ import { ViewModel } from '../../../models/photographesVm.js';
 import { pageBuilder } from '../../../templates/photographer/photographe.js';
 
 //Mettre le code JavaScript lié à la page photographer.html
-export const initPage = (mediasData, photographer) => {
+const initPage = (mediasData, photographer) => {
   debugger;
   const isPageBuilded = document.querySelector('#profile').dataset.pageBuilded;
   if (!isPageBuilded) {

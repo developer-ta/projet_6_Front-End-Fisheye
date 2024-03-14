@@ -4,6 +4,7 @@ import { photographerTemplate } from './../accueil/index.js';
 export const _mainSection = (mediasData, phData) => {
 	_ProfilePartiale(phData);
 	_sortSelectMenuPartiale();
+	_gallerySection(mediasData, phData);
 };
 //profile partiale
 const _ProfilePartiale = (data) => {
@@ -36,7 +37,26 @@ const _sortSelectMenuPartiale = () => {
 };
 
 // main > gallery
-const _gallerySection = () => {};
+const _gallerySection = (mediasData, phData) => {
+	// {
+	// 	"id": 342550,
+	// 	"photographerId": 82,
+	// 	"title": "Fashion Yellow Beach",
+	// 	"image": "Fashion_Yellow_Beach.jpg",
+	// 	"likes": 62,
+	// 	"date": "2011-12-08",
+	// 	"price": 55
+	// }
+	debugger;
+	mediasData.forEach(el => {
+		let imgUrl = `${phData.name.split(' ')[0]}/${el.image}`
+		console.log('imgUrl: ', imgUrl);
+		let picture = `/assets/Sample Photos/${imgUrl}`;
+		let $img_html = `<div class="galleryImg-container" > <img src="${picture}"></div>`
+		const $gallery = document.querySelector('#gallery')
+		$gallery.innerHTML += $img_html;
+	});
+};
 
 //_gallerySection > partial
 const _likePartiale = () => {};

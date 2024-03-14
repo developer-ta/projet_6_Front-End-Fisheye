@@ -1,6 +1,6 @@
 import { ViewModel } from '../../models/photographesVm.js';
 import { init } from '../../pages/controllers/accueil/index.js';
-import { initPage } from '../../pages/controllers/photographes/photographe.js';
+import { renderPage } from '../../pages/controllers/photographes/photographe.js';
 
 //import { renderPage } from './../../pages/controllers/photographes/photographe.js';
 export class Factory {
@@ -10,7 +10,7 @@ export class Factory {
   }
   get pathParams() {
     if (history.state && history.state.id) {
-      return history.state;
+      return history.state.id;
     }
     return localStorage.getItem('id');
   }
@@ -28,16 +28,18 @@ export class Factory {
     const { photographers, medias } = this.models;
 
     if (this.pathName === '/photographer.html') {
-      let photographer = photographers.find((ph) => ph.id == this.pathParams.id);
-      console.table(photographer, medias);
+      let photographer = photographers.find((ph) => ph.id == this.pathParams);
+      let mediaList = medias.filter((ph) => ph.photographerId == this.pathParams);
 
-      if (photographer) {
+
+      if (photographer && mediaList) {
         //page photographer
-        initPage(medias, photographer);
+        renderPage(mediaList, photographer);
         return;
+      } else {
+        throw new Error(`Photographe  id = ${this.pathParams?.id} existe pas !`);
       }
 
-      throw new Error(`Photographe  id = ${this.pathParams.id} existe pas !`);
     } else if (this.pathName === '/index.html' || this.pathName === '/') {
       //page accueil
       init(photographers);
