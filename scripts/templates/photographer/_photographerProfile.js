@@ -11,6 +11,6 @@ export const _ProfilePartiale = (data) => {
   const $img_container = $div_profile.querySelector('.img-container');
   // position dom element
   //$div_profile.insertAdjacentElement('afterend', $img);
-  $img_container.insertAdjacentElement('beforebegin', $btn_contact);
+  $img_container.insertAdjacentElement('afterend', $btn_contact);
   $div_profile.appendChild($profileHtml).setAttribute('data-pageBuilded', 'true');
 };
