@@ -39,25 +39,48 @@ const _sortSelectMenuPartiale = () => {
 // main > gallery
 const _gallerySection = (mediasData, phData) => {
 	// {
-	// 	"id": 342550,
+	// 	"id": 7324238,
 	// 	"photographerId": 82,
-	// 	"title": "Fashion Yellow Beach",
-	// 	"image": "Fashion_Yellow_Beach.jpg",
-	// 	"likes": 62,
-	// 	"date": "2011-12-08",
+	// 	"title": "18th Anniversary",
+	// 	"image": "Event_18thAnniversary.jpg",
+	// 	"likes": 33,
+	// 	"date": "2019-06-12",
 	// 	"price": 55
-	// }
+	// },
+	// {
+	// 	"id": 8328953,
+	// 	"photographerId": 82,
+	// 	"title": "Wooden sculpture of a horse",
+	// 	"video": "Art_Wooden_Horse_Sculpture.mp4",
+	// 	"likes": 24,
+	// 	"date": "2011-12-08",
+	// 	"price": 100
+	//   },
 	debugger;
+	const $gallery = document.querySelector('#gallery')
 	mediasData.forEach(el => {
-		let imgUrl = `${phData.name.split(' ')[0]}/${el.image}`
-		console.log('imgUrl: ', imgUrl);
-		let picture = `/assets/Sample Photos/${imgUrl}`;
-		let $img_html = `<div class="galleryImg-container" > <img src="${picture}"></div>`
-		const $gallery = document.querySelector('#gallery')
-		$gallery.innerHTML += $img_html;
+		let mediaUrl = `${phData.name.split(' ')[0]}/`;
+		let picture = `/assets/Sample Photos/`;
+		let video = picture;
+		let $media_html = `<div class="galleryImg-container">`
+
+		if (el.image) {
+			mediaUrl += `${el.image}`
+			picture += mediaUrl
+			$media_html += `<img src="${picture}"></div>`
+		} else if (el.video) {
+			mediaUrl += `${el.video}`
+			video += mediaUrl
+			$media_html += `<video  controls ><source src="${video}"></video></div>`
+		}
+		console.log('imgUrl: ', mediaUrl);
+		// let picture = `/assets/Sample Photos/${imgUrl}`;
+		// let $img_html = `<div class="galleryImg-container" > <img src="${picture}"></div>`
+
+		$gallery.innerHTML += $media_html;
 	});
 };
 
 //_gallerySection > partial
-const _likePartiale = () => {};
-const _likeTotalPartiale = () => {};
+const _likePartiale = () => { };
+const _likeTotalPartiale = () => { };
