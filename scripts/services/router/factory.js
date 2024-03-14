@@ -28,7 +28,7 @@ export class Factory {
     const { photographers, medias } = this.models;
 
     if (this.pathName === '/photographer.html') {
-      let photographer = photographers.find((ph) => ph.id == this.pathParams);
+      let photographer = photographers.find((ph) => ph.id == this.pathParams.id);
       console.table(photographer, medias);
 
       if (photographer) {
@@ -37,7 +37,7 @@ export class Factory {
         return;
       }
 
-      throw new Error(`Photographe  id = ${pathParams} existe pas !`);
+      throw new Error(`Photographe  id = ${this.pathParams.id} existe pas !`);
     } else if (this.pathName === '/index.html' || this.pathName === '/') {
       //page accueil
       init(photographers);
