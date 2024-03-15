@@ -22,42 +22,54 @@ const _ProfilePartiale = (data) => {
 };
 //main > select Menu partial
 const _sortSelectMenuPartiale = (mediasData, phData) => {
-
-	const $menuSection = document.querySelector('#menu')
-
+	debugger;
 	let menu_html = `<div>
 	<label for="menu-tri">Trier par</label>
 	<select name="menu-tri" id="select_tri">
-	  <option value="Popularité" selected>Popularité</option>
-	  <option value="Date">Date</option>
-	  <option value="Titre">Titre</option>
+	<option value="Popularité" selected>Popularité</option>
+	<option value="Date">Date</option>
+	<option value="Titre">Titre</option>
 	</select>
 	</div>`
+
+
+
+	const $menuSection = document.querySelector('#menu')
 	$menuSection.innerHTML = menu_html;
 
-	let valSelect = $menuSection.querySelector('#select_tri').value;
-	let sortList;
+	// Dom elements in $menuSection
+	const $select_tri = $menuSection.querySelector('#select_tri')
 
-	if (valSelect == 'Popularité') {
-		sortList = mediasData.sort(function (a, b) { return a.likes - b.likes });
 
-		//by default popularité select
-		_gallerySection(sortList, phData)
-	}
+	//check onchange
+	$select_tri.addEventListener('change', ev => {
+		ev.preventDefault();
+		debugger;
+		if ($select_tri.value == 'Popularité') {
+			let sortList = mediasData.sort(function (a, b) { return b.likes - a.likes });
 
-	else if (valSelect == "Date") {
-		sortList = mediasData.sort(function (a, b) {
-			return a.date.toLocaleDateString('fr-FR') - b.date.toLocaleDateString('fr-FR')
-		});
+			//by default popularité select
+			_gallerySection(sortList, phData)
+		}
+		//a.date.toLocaleDateString('fr-FR') - b.date.toLocaleDateString('fr-FR')
+		else if ($select_tri.value == "Date") {
 
-		_gallerySection(sortList, phData)
-	}
+			let sortList = mediasData.sort(function (a, b) {
+				return new Date(a.date) - new Date(b.date)
+			});
 
-	else if (valSelect == "Titre") {
-		sortList = mediasData.sort(function (a, b) { return a.title - b.title });
+			_gallerySection(sortList, phData)
+		}
 
-		_gallerySection(sortList, phData)
-	}
+		else if ($select_tri.value == "Titre") {
+			let sortList = mediasData.sort((a, b) => a.title.localeCompare(b.title));
+
+			_gallerySection(sortList, phData)
+		}
+
+	});
+	// call by default ev change first
+	$select_tri.dispatchEvent(new Event('change'));
 
 
 
@@ -86,6 +98,7 @@ const _gallerySection = (sortedMediasData, phData) => {
 	debugger;
 	const $gallery = document.querySelector('#gallery')
 	$gallery.innerHTML = ''
+	console.table(sortedMediasData);
 	sortedMediasData.forEach(el => {
 		let mediaUrl = `${phData.name.split(' ')[0].includes('-')
 			? phData.name.split(' ')[0].split('-').join(' ')
@@ -103,7 +116,7 @@ const _gallerySection = (sortedMediasData, phData) => {
 			video += mediaUrl
 			$media_html += `<video  controls ><source src="${video}"></video></div>`
 		}
-		console.log('imgUrl: ', mediaUrl);
+
 		// let picture = `/assets/Sample Photos/${imgUrl}`;
 		// let $img_html = `<div class="galleryImg-container" > <img src="${picture}"></div>`
 
