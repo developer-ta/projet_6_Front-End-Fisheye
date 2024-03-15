@@ -136,3 +136,23 @@ width: 98%;
             border-radius: 5px;
             cursor: pointer;
         }
+        .like-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+
+        .hart-like {
+            font-size: 1.7rem;
+            cursor: pointer;
+        }
+
+        #like {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 15%;
+            align-items: center;
+        }

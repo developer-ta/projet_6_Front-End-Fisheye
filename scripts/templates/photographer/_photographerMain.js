@@ -68,7 +68,7 @@ const _sortSelectMenuPartiale = (mediasData, phData) => {
 		}
 
 	});
-	// call by default ev change first
+	// call by default event change first
 	$select_tri.dispatchEvent(new Event('change'));
 
 
@@ -98,32 +98,49 @@ const _gallerySection = (sortedMediasData, phData) => {
 	debugger;
 	const $gallery = document.querySelector('#gallery')
 	$gallery.innerHTML = ''
+	//let $div_galleryImgContainer=document.querySelector('.galleryImg-container');
 	console.table(sortedMediasData);
 	sortedMediasData.forEach(el => {
 		let mediaUrl = `${phData.name.split(' ')[0].includes('-')
 			? phData.name.split(' ')[0].split('-').join(' ')
 			: phData.name.split(' ')[0]}/`;
+
+		//addresses file img
 		let picture = `/assets/Sample Photos/`;
 		let video = picture;
 		let $media_html = `<div class="galleryImg-container">`
 
+		//  verifiers que type image ou vidions
 		if (el.image) {
 			mediaUrl += `${el.image}`
 			picture += mediaUrl
-			$media_html += `<img src="${picture}"></div>`
+			$media_html += `<img src="${picture}">`
 		} else if (el.video) {
 			mediaUrl += `${el.video}`
 			video += mediaUrl
-			$media_html += `<video  controls ><source src="${video}"></video></div>`
+			$media_html += `<video  controls ><source src="${video}"></video>`
 		}
-
-		// let picture = `/assets/Sample Photos/${imgUrl}`;
-		// let $img_html = `<div class="galleryImg-container" > <img src="${picture}"></div>`
+		//add like partiale view
+		$media_html += _likePartiale(el);
 
 		$gallery.innerHTML += $media_html;
+
+		//partial view of gallery section
+
 	});
 };
 
 //_gallerySection > partial
-const _likePartiale = () => { };
+const _likePartiale = (mediaData) => {
+	debugger
+	const $like_html =
+		`<div class="like-container">
+	<p id="title">${mediaData.title}</p>
+	<p id="like">
+	  <span>${mediaData.likes}</span>
+	  <span class="hart-like">&#9825</span>
+	</p>
+  </div></div>`
+	return $like_html;
+};
 const _likeTotalPartiale = () => { };
