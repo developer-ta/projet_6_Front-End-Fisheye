@@ -33,7 +33,7 @@ const _sortSelectMenuPartiale = (mediasData, phData) => {
 	</div>`
 
 
-
+	let sortList;
 	const $menuSection = document.querySelector('#menu')
 	$menuSection.innerHTML = menu_html;
 
@@ -46,7 +46,7 @@ const _sortSelectMenuPartiale = (mediasData, phData) => {
 		ev.preventDefault();
 		debugger;
 		if ($select_tri.value == 'Popularité') {
-			let sortList = mediasData.sort(function (a, b) { return b.likes - a.likes });
+			sortList = mediasData.sort(function (a, b) { return b.likes - a.likes });
 
 			//by default popularité select
 			_gallerySection(sortList, phData)
@@ -54,7 +54,7 @@ const _sortSelectMenuPartiale = (mediasData, phData) => {
 		//a.date.toLocaleDateString('fr-FR') - b.date.toLocaleDateString('fr-FR')
 		else if ($select_tri.value == "Date") {
 
-			let sortList = mediasData.sort(function (a, b) {
+			sortList = mediasData.sort(function (a, b) {
 				return new Date(a.date) - new Date(b.date)
 			});
 
@@ -62,7 +62,7 @@ const _sortSelectMenuPartiale = (mediasData, phData) => {
 		}
 
 		else if ($select_tri.value == "Titre") {
-			let sortList = mediasData.sort((a, b) => a.title.localeCompare(b.title));
+			sortList = mediasData.sort((a, b) => a.title.localeCompare(b.title));
 
 			_gallerySection(sortList, phData)
 		}
