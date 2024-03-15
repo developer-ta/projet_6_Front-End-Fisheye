@@ -43,6 +43,7 @@ h1 {
     flex-direction: column;
 }
 
+h2,
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
@@ -62,25 +63,24 @@ h1 {
     align-items: center;}
     article  {
         display: flex;
+        height: 100%;
         align-items: center;
         flex-wrap: nowrap;
-        justify-content: space-evenly;
+        justify-content: space-between;
         flex-direction: row-reverse;
     }
-    
- 
     article img {
+width: 98%;
         height: auto;
-        width: 100%;
-        transform: scale(5);
+        transform: scale(4);
         display: block;
     }
     .img-container {
         border-radius: 50%;
         overflow: hidden;
-        padding: 5rem 5rem;
+        padding: 5rem 3rem;
         height: auto;
-        width: 6rem;
+        width: 12rem;
         margin: 0rem;
     }
 .detail-container{ 
@@ -104,7 +104,35 @@ h1 {
         align-items: center;
     }
     .galleryImg-container {
-        width: 23%;
-        height: 25rem;
-        margin: 1rem auto;
+        width: 28%;
+        height: 23rem;
+        margin: 2rem 1rem;
+        }
+
+
+        #menu {
+
+            height: 1rem;
+            font-size: 20px;
+            font-weight: bold;
+            width: 32%;
+            margin: 8rem;
+        }
+
+        #menu div {
+            display: flex;
+            flex-direction: row;
+        }
+
+        #select_tri {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            padding: 11px;
+            width: 200px;
+            height: 90px;
+            border: none;
+            background-color: #901C1C;
+            border-radius: 5px;
+            cursor: pointer;
         }

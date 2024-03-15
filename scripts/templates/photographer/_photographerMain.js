@@ -3,8 +3,8 @@ import { photographerTemplate } from './../accueil/index.js';
 //main part
 export const _mainSection = (mediasData, phData) => {
 	_ProfilePartiale(phData);
-	_sortSelectMenuPartiale();
-	_gallerySection(mediasData, phData);
+	_sortSelectMenuPartiale(mediasData, phData);
+	//_gallerySection(mediasData, phData);
 };
 //profile partiale
 const _ProfilePartiale = (data) => {
@@ -20,8 +20,9 @@ const _ProfilePartiale = (data) => {
 	$img_container.insertAdjacentElement('afterend', $btn_contact);
 	$div_profile.appendChild($profileHtml).setAttribute('data-pageBuilded', 'true');
 };
-//main > partial
-const _sortSelectMenuPartiale = () => {
+//main > select Menu partial
+const _sortSelectMenuPartiale = (mediasData, phData) => {
+
 	const $menuSection = document.querySelector('#menu')
 
 	let menu_html = `<div>
@@ -34,10 +35,36 @@ const _sortSelectMenuPartiale = () => {
 	</div>`
 	$menuSection.innerHTML = menu_html;
 
+	let valSelect = $menuSection.querySelector('#select_tri').value;
+	let sortList;
+
+	if (valSelect == 'Popularité') {
+		sortList = mediasData.sort(function (a, b) { return a.likes - b.likes });
+
+		//by default popularité select
+		_gallerySection(sortList, phData)
+	}
+
+	else if (valSelect == "Date") {
+		sortList = mediasData.sort(function (a, b) {
+			return a.date.toLocaleDateString('fr-FR') - b.date.toLocaleDateString('fr-FR')
+		});
+
+		_gallerySection(sortList, phData)
+	}
+
+	else if (valSelect == "Titre") {
+		sortList = mediasData.sort(function (a, b) { return a.title - b.title });
+
+		_gallerySection(sortList, phData)
+	}
+
+
+
 };
 
 // main > gallery
-const _gallerySection = (mediasData, phData) => {
+const _gallerySection = (sortedMediasData, phData) => {
 	// {
 	// 	"id": 7324238,
 	// 	"photographerId": 82,
@@ -58,8 +85,11 @@ const _gallerySection = (mediasData, phData) => {
 	//   },
 	debugger;
 	const $gallery = document.querySelector('#gallery')
-	mediasData.forEach(el => {
-		let mediaUrl = `${phData.name.split(' ')[0]}/`;
+	$gallery.innerHTML = ''
+	sortedMediasData.forEach(el => {
+		let mediaUrl = `${phData.name.split(' ')[0].includes('-')
+			? phData.name.split(' ')[0].split('-').join(' ')
+			: phData.name.split(' ')[0]}/`;
 		let picture = `/assets/Sample Photos/`;
 		let video = picture;
 		let $media_html = `<div class="galleryImg-container">`

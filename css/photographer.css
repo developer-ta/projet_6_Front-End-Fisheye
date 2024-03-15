@@ -3,7 +3,7 @@
 }
 .photograph-header {
     background-color: #FAFAFA;
-    height: auto;
+    height: 35rem;
     margin: 0 10px;
 }
 
@@ -12,8 +12,8 @@
     font-weight: bold;
     color: white;
     padding: 11px;
-    width: 170px;
-    height: 70px;
+    width: 200px;
+    height: 90px;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
