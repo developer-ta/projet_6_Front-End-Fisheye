@@ -120,27 +120,50 @@ const _gallerySection = (sortedMediasData, phData) => {
 			video += mediaUrl
 			$media_html += `<video  controls ><source src="${video}"></video>`
 		}
-		//add like partiale view
-		$media_html += _likePartiale(el);
 
-		$gallery.innerHTML += $media_html;
+		//add like partiale view
+		$media_html += _likePartialeTemplate(el);
 
 		//partial view of gallery section
+		$gallery.innerHTML += $media_html;
+
+		_likePartialeScript(el);
 
 	});
 };
 
 //_gallerySection > partial
-const _likePartiale = (mediaData) => {
+const _likePartialeTemplate = (mediaData) => {
 	debugger
 	const $like_html =
-		`<div class="like-container">
+	`<div class="like-container">
 	<p id="title">${mediaData.title}</p>
 	<p id="like">
-	  <span>${mediaData.likes}</span>
-	  <span class="hart-like">&#9825</span>
+	<span>${mediaData.likes}</span>
+	<span class="hart-like">&#9825</span>
 	</p>
-  </div></div>`
+	</div></div>`
+
 	return $like_html;
+
+
+
 };
+//script of _likePartialeTemplate
+const _likePartialeScript = (mediaData) => {
+
+	const $hartLike = document.querySelector('.hart-like');
+
+	const counterLike = (ev) => {
+		debugger;
+		ev.preventDefault();
+
+		mediaData.likes++;
+
+		// call to  _likeTotalPartiale()
+		ev.target.removeEventListener("click", counterLike)
+	}
+
+	$hartLike.addEventListener('click', counterLike)
+}
 const _likeTotalPartiale = () => { };
