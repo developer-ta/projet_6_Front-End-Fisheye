@@ -16,10 +16,13 @@ export const renderPage = (mediasData, photographer) => {
   initPage(mediasData, photographer);
 };
 debugger;
+
 async function main() {
   debugger;
+  if (location.pathname === '/photographer.html') { 
   const factory = await import('../../../services/router/factory.js');
   factory.Factory.prototype.getPage();
-  console.log('renderPage: ');
+    console.log('renderPage: ');
+  }
 }
 main();

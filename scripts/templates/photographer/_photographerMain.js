@@ -9,6 +9,7 @@ export const _mainSection = (mediasData, phData) => {
 	_sortSelectGalleryPartiale(mediasData, phData);
 
 };
+
 //profile partiale
 const _ProfilePartiale = (data) => {
 	// DOM elements
@@ -23,6 +24,7 @@ const _ProfilePartiale = (data) => {
 	$img_container.insertAdjacentElement('afterend', $btn_contact);
 	$div_profile.appendChild($profileHtml).setAttribute('data-pageBuilded', 'true');
 };
+
 //main > select Menu and gallery partial
 const _sortSelectGalleryPartiale = (mediasData, phData) => {
 	debugger;
@@ -34,7 +36,6 @@ const _sortSelectGalleryPartiale = (mediasData, phData) => {
 	<option value="Titre">Titre</option>
 	</select>
 	</div>`
-
 
 	let sortList;
 	const $menuSection = document.querySelector('#menu')
@@ -71,10 +72,9 @@ const _sortSelectGalleryPartiale = (mediasData, phData) => {
 		}
 
 	});
+
 	// call by default event change first
 	$select_tri.dispatchEvent(new Event('change'));
-
-
 
 };
 
@@ -152,6 +152,7 @@ const _likePartialeTemplate = (mediaData) => {
 
 
 };
+
 //script of _likePartialeTemplate
 const _likePartialeScript = () => {
 	debugger;
@@ -168,14 +169,15 @@ const _likePartialeScript = () => {
 		$elBefore.innerText = subjoinLikes;
 
 		// call to  _likeTotalPartiale()
+
+		//remove event linked to counterLike
 		ev.target.removeEventListener("click", counterLike)
 	}
 
-
-	for (const hart of $hartLikes) {
-
-		hart.addEventListener('click', counterLike)
+	for (const $hart of $hartLikes) {
+		$hart.addEventListener('click', counterLike)
 	}
 
 }
+
 const _likeTotalPartiale = () => { };

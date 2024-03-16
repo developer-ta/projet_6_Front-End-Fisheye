@@ -1,6 +1,6 @@
 import { ViewModel } from '../models/photographesVm.js';
 import { FetchApi } from '../services/api/httpClient.js';
-import { navigatePage } from './../services/router/factory.js';
+import { Factory } from './../services/router/factory.js';
 
 class App {
   constructor() {
@@ -14,11 +14,11 @@ class App {
     this.allData = await this.fetchApi.getAllData('/data/photographers.json');
     //models
     new ViewModel(this.allData);
-
+    Factory.prototype.getPage();
     // this.photographers = this.vm.getPhotographeList();
     // this.medias = this.vm.getMediaList();
     //routage
-    navigatePage();
+    //navigatePage();
     //this.router.getNewPage(photographersVm);
     //views controller
   }
