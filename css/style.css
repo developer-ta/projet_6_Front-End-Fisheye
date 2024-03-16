@@ -156,3 +156,7 @@ width: 98%;
             width: 15%;
             align-items: center;
         }
+        #lightbox {
+            display: none;
+            /* visibility: hidden; */
+        }

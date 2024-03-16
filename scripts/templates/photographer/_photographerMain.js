@@ -2,9 +2,12 @@ import { photographerTemplate } from './../accueil/index.js';
 
 //main part
 export const _mainSection = (mediasData, phData) => {
+	//part 1
 	_ProfilePartiale(phData);
-	_sortSelectMenuPartiale(mediasData, phData);
-	//_gallerySection(mediasData, phData);
+
+	//part 2
+	_sortSelectGalleryPartiale(mediasData, phData);
+
 };
 //profile partiale
 const _ProfilePartiale = (data) => {
@@ -20,8 +23,8 @@ const _ProfilePartiale = (data) => {
 	$img_container.insertAdjacentElement('afterend', $btn_contact);
 	$div_profile.appendChild($profileHtml).setAttribute('data-pageBuilded', 'true');
 };
-//main > select Menu partial
-const _sortSelectMenuPartiale = (mediasData, phData) => {
+//main > select Menu and gallery partial
+const _sortSelectGalleryPartiale = (mediasData, phData) => {
 	debugger;
 	let menu_html = `<div>
 	<label for="menu-tri">Trier par</label>
@@ -127,7 +130,7 @@ const _gallerySection = (sortedMediasData, phData) => {
 		//partial view of gallery section
 		$gallery.innerHTML += $media_html;
 
-		_likePartialeScript(el);
+		_likePartialeScript(el.likes);
 
 	});
 };
@@ -139,7 +142,7 @@ const _likePartialeTemplate = (mediaData) => {
 	`<div class="like-container">
 	<p id="title">${mediaData.title}</p>
 	<p id="like">
-	<span>${mediaData.likes}</span>
+	<span class="like-amount">${mediaData.likes}</span>
 	<span class="hart-like">&#9825</span>
 	</p>
 	</div></div>`
@@ -150,20 +153,29 @@ const _likePartialeTemplate = (mediaData) => {
 
 };
 //script of _likePartialeTemplate
-const _likePartialeScript = (mediaData) => {
-
-	const $hartLike = document.querySelector('.hart-like');
+const _likePartialeScript = () => {
+	debugger;
+	const $hartLikes = document.getElementsByClassName('hart-like');
 
 	const counterLike = (ev) => {
 		debugger;
 		ev.preventDefault();
 
-		mediaData.likes++;
+		// find before node span 
+		const $elBefore = ev.target.previousElementSibling;
+
+		let subjoinLikes = Number($elBefore.innerText) + 1;
+		$elBefore.innerText = subjoinLikes;
 
 		// call to  _likeTotalPartiale()
 		ev.target.removeEventListener("click", counterLike)
 	}
 
-	$hartLike.addEventListener('click', counterLike)
+
+	for (const hart of $hartLikes) {
+
+		hart.addEventListener('click', counterLike)
+	}
+
 }
 const _likeTotalPartiale = () => { };
