@@ -171,10 +171,13 @@ const _likePartialeScript = () => {
 		let subjoinLikes = Number($elBefore.innerText) + 1;
 		$elBefore.innerText = subjoinLikes;
 
-		// call to  _likeTotalPartiale()
+		// call calcul total likes
+		calculLikes();
 
 		//remove event linked to counterLike
 		ev.target.removeEventListener("click", counterLike)
+
+
 	}
 
 	for (const $hart of $hartLikes) {
@@ -187,6 +190,8 @@ const _likeTotalPartiale = (mediaListData, phData) => {
 	let sumLikes = 0;
 	mediaListData.forEach((media) => { sumLikes += media.likes })
 	const $mainSection = document.getElementById("main");
+	localStorage.setItem("totalLikes", sumLikes);
+
 
 	let likeTotal_html = `
 	<div class="like-total">
@@ -198,3 +203,18 @@ const _likeTotalPartiale = (mediaListData, phData) => {
 	$mainSection.insertAdjacentHTML('afterend', likeTotal_html)
 
 };
+
+const calculLikes = () => {
+	debugger;
+	let existeLikes = localStorage.getItem("totalLikes")
+	const $sum_likes = document.getElementById('sum_likes');
+	if ($sum_likes && existeLikes) {
+		existeLikes++;
+		//update localStorage
+		localStorage.setItem("totalLikes", existeLikes)
+		$sum_likes.textContent = existeLikes;
+	}
+
+
+
+}
