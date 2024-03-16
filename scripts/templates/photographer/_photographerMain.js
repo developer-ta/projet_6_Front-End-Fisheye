@@ -8,6 +8,9 @@ export const _mainSection = (mediasData, phData) => {
 	//part 2
 	_sortSelectGalleryPartiale(mediasData, phData);
 
+	//part 3
+	_likeTotalPartiale(mediasData, phData)
+
 };
 
 //profile partiale
@@ -143,7 +146,7 @@ const _likePartialeTemplate = (mediaData) => {
 	<p id="title">${mediaData.title}</p>
 	<p id="like">
 	<span class="like-amount">${mediaData.likes}</span>
-	<span class="hart-like">&#9825</span>
+	<span class="hart-like">&#x2665;</span>
 	</p>
 	</div></div>`
 
@@ -180,4 +183,18 @@ const _likePartialeScript = () => {
 
 }
 
-const _likeTotalPartiale = () => { };
+const _likeTotalPartiale = (mediaListData, phData) => {
+	let sumLikes = 0;
+	mediaListData.forEach((media) => { sumLikes += media.likes })
+	const $mainSection = document.getElementById("main");
+
+	let likeTotal_html = `
+	<div class="like-total">
+	<p id="sum_likes">${sumLikes}  </p>
+	<span class="total-like">&#x2665;</span>
+	<p id="Price">${phData.price}€/jour</p>
+	</div>`
+
+	$mainSection.insertAdjacentHTML('afterend', likeTotal_html)
+
+};
