@@ -1,4 +1,5 @@
 import { photographerTemplate } from './../accueil/index.js';
+import { _lightboxModal } from './_lightboxModal.js';
 
 //main part
 export const _mainSection = (mediasData, phData) => {
@@ -10,6 +11,9 @@ export const _mainSection = (mediasData, phData) => {
 
 	//part 3
 	_likeTotalPartiale(mediasData, phData)
+
+	//part 4
+	_lightboxModal();
 
 };
 
@@ -76,7 +80,7 @@ const _sortSelectGalleryPartiale = (mediasData, phData) => {
 
 	});
 
-	// call by default event change first
+	// call by default first time
 	$select_tri.dispatchEvent(new Event('change'));
 
 };
@@ -92,15 +96,7 @@ const _gallerySection = (sortedMediasData, phData) => {
 	// 	"date": "2019-06-12",
 	// 	"price": 55
 	// },
-	// {
-	// 	"id": 8328953,
-	// 	"photographerId": 82,
-	// 	"title": "Wooden sculpture of a horse",
-	// 	"video": "Art_Wooden_Horse_Sculpture.mp4",
-	// 	"likes": 24,
-	// 	"date": "2011-12-08",
-	// 	"price": 100
-	//   },
+
 	debugger;
 	const $gallery = document.querySelector('#gallery')
 	$gallery.innerHTML = ''

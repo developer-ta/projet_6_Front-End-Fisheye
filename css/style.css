@@ -189,3 +189,60 @@ object-fit: cover;
     font-size: 1.8rem;
     padding: 0;
 }
+.circuit {
+    font-size: 1.9rem;
+    cursor: pointer;
+    color: #901c1c;
+    margin-left: 5px;
+    position: absolute;
+    top: 40%;
+}
+
+.close {
+    font-size: 3.9rem;
+    cursor: pointer;
+    color: #901c1c;
+    margin-left: 5px;
+    position: absolute;
+    right: 5%;
+    bottom: 91%;
+}
+
+.img-lightbox {
+    width: 80%;
+    height: auto;
+}
+
+.modal-lightbox {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+#dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    border: 1px solid aqua;
+}
+
+.next {
+    right: 5%;
+
+}
+
+.previous {
+    left: 5%;
+
+}
+
+.modal-contend {
+    width: 100%;
+}
+
+#title_lightbox {
+    position: relative;
+    right: 35%;
+}
