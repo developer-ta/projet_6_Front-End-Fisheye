@@ -161,7 +161,7 @@ object-fit: cover;
             width: 15%;
             align-items: center;
         }
-        #lightbox {
+        .lightbox {
             display: none;
             /* visibility: hidden; */
         }
