@@ -20,10 +20,14 @@ export const _lightboxModal = () => {
 	//Dom el
 	const $lightBox_centenaire = document.querySelector('.lightbox')
 	$lightBox_centenaire.innerHTML = lightBox_template;
-	const $imgContainerList = document.getElementsByClassName("galleryImg-container");
 	const $modalImg = document.querySelector('.modal-contend')
 	const $gallery = document.getElementById('gallery');
 	const $close_span = $lightBox_centenaire.querySelector('.close')
+	const $previous_span = $lightBox_centenaire.querySelector('.previous')
+	const $next_span = $lightBox_centenaire.querySelector('.next')
+	const $imgList = document.querySelectorAll("#gallery img");
+
+
 
 	//function for open or close lightbox
 	const lightboxHandler = (ev) => {
@@ -46,40 +50,77 @@ export const _lightboxModal = () => {
 		}
 		//img display in modal 
 		const imgUrl = ev.target.src;
+		$modalImg.index = ev.target.imgIndex
 		$modalImg.src = imgUrl;
 
 
 	}
+	console.log('$imgList: ', $imgList);
 	//list of src to imgs
 	const _srcList = []
 	//set src img in element Dom
-	for (let i = 0; i < $imgContainerList.length; i++) {
+	for (let i = 0; i < $imgList.length; i++) {
 
-		const $element = $imgContainerList[i];
+		const $imgTag = $imgList[i];
 
-		if ($element.tagName !== 'VIDEO' && $element.firstChild.src) {
+		if ($imgTag.tagName !== 'VIDEO' && $imgTag.src) {
 
-			$element.firstChild.srcByIndex = $element.firstChild.src
-			_srcList.push($element.firstChild.src)
-			//$element.firstChild.srcList = _srcList
+			$imgTag.srcByIndex = $imgTag.src
+			$imgTag.imgIndex = i
+			_srcList.push($imgTag.src)
+			//$imgTag.srcList = _srcList
 
-		} else if ($element.firstChild.firstChild.src) {
+		} else if ($imgTag.firstChild.src) {
 
-			$element.firstChild.srcByIndex = $element.firstChild.firstChild.src
-			_srcList.push($element.firstChild.firstChild.src)
-			//$element.firstChild.srcList = _srcList
+			$imgTag.srcByIndex = $imgTag.firstChild.src
+			$imgTag.imgIndex = i
+			_srcList.push($imgTag.firstChild.src)
+
 		}
-		console.log('$element.firstChild.srcByIndex: ', $element.firstChild.srcByIndex);
-		console.log('$element.firstChild.srcList: ', $element.firstChild.srcList);
+
 		//action for open lightbox modal
-		$gallery.srcList = _srcList;
-		$element.firstChild.addEventListener("click", lightboxHandler)
+		$imgTag.addEventListener("click", lightboxHandler)
 
 
 	}
+	$gallery.srcList = _srcList;
 	//action for close lightbox modal
 	$close_span.addEventListener("click", lightboxHandler);
+	//Carousel img
+	$previous_span.addEventListener("click", carouselImg);
+	$next_span.addEventListener("click", carouselImg);
 
-	//console.log('$imgContainerList: ', $imgContainerList[0].firstChild.srcByIndex);
+
+	//console.log('$imgList: ', $imgList[0].firstChild.srcByIndex);
 
 };
+
+
+const carouselImg = (ev) => {
+
+	const $currentModalImg = document.querySelector('.modal-contend')
+	const $gallery = document.getElementById('gallery');
+	const imgList = $gallery.srcList;
+	let imgIndex = $currentModalImg.index;
+	if ((imgIndex - 1) < 0) {
+		imgIndex = imgList.length - 1
+	} else if ((imgIndex + 1) >= imgList.length) {
+		imgIndex = 0
+	}
+
+	if (ev.target.classList[0] == 'previous') {
+
+		$currentModalImg.src = imgList[imgIndex - 1]
+		$currentModalImg.index = imgIndex - 1
+		console.log('imgIndex: ', imgIndex);
+		console.log('$currentModalImg.src: ', $currentModalImg.src);
+	} else if (ev.target.classList[0] == 'next') {
+
+		$currentModalImg.src = imgList[imgIndex + 1]
+		$currentModalImg.index = imgIndex + 1
+	}
+	debugger;
+
+
+
+}
