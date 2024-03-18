@@ -30,32 +30,31 @@ export const _lightboxModal = () => {
 
 
 	//function for open or close lightbox
-	const lightboxHandler = (ev) => {
-		debugger
-		ev.preventDefault();
+	// const lightboxHandler = (ev) => {
+	// 	debugger
+	// 	ev.preventDefault();
 
 
-		if ($gallery.style.display !== 'none') {
+	// 	if ($gallery.style.display !== 'none') {
+	// 		$gallery.style.display = 'none'
 
-			$gallery.style.display = 'none'
-		} else {
-			$gallery.style.display = 'flex'
+	// 	} else {
+	// 		$gallery.style.display = 'flex'
+	// 	}
+	// 	if ($lightBox_centenaire.style.display !== 'flex') {
+	// 		$lightBox_centenaire.style.display = 'flex'
+	// 	} else {
 
-		}
-		if ($lightBox_centenaire.style.display !== 'none') {
-			$lightBox_centenaire.style.display = 'block'
-		} else {
-
-			$lightBox_centenaire.style.display = 'none'
-		}
-		//img display in modal 
-		const imgUrl = ev.target.src;
-		$modalImg.index = ev.target.imgIndex
-		$modalImg.src = imgUrl;
+	// 		$lightBox_centenaire.style.display = 'none'
+	// 	}
+	// 	//img display in modal 
+	// 	const imgUrl = ev.target.src;
+	// 	$modalImg.index = ev.target.imgIndex
+	// 	$modalImg.src = imgUrl;
 
 
-	}
-	console.log('$imgList: ', $imgList);
+	// }
+	//console.log('$imgList: ', $imgList);
 	//list of src to imgs
 	const _srcList = []
 	//set src img in element Dom
@@ -121,6 +120,39 @@ const carouselImg = (ev) => {
 	}
 	debugger;
 
+
+
+}
+
+
+
+export const lightboxHandler = (ev) => {
+	debugger
+	ev.preventDefault();
+
+	//Dom el
+	const $lightBox_centenaire = document.querySelector('.lightbox')
+
+	const $modalImg = document.querySelector('.modal-contend')
+	const $gallery = document.getElementById('gallery');
+	
+	
+	if ($gallery.style.display !== 'none') {
+		$gallery.style.display = 'none'
+
+	} else {
+		$gallery.style.display = 'flex'
+	}
+	if ($lightBox_centenaire.style.display !== 'flex') {
+		$lightBox_centenaire.style.display = 'flex'
+	} else {
+
+		$lightBox_centenaire.style.display = 'none'
+	}
+	//img display in modal 
+	const imgUrl = ev.target.src;
+	$modalImg.index = ev.target.imgIndex
+	$modalImg.src = imgUrl;
 
 
 }
