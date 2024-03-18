@@ -98,6 +98,7 @@ export const _lightboxModal = () => {
 const carouselImg = (ev) => {
 
 	const $currentModalImg = document.querySelector('.modal-contend')
+
 	const $gallery = document.getElementById('gallery');
 	const imgList = $gallery.srcList;
 	let imgIndex = $currentModalImg.index;

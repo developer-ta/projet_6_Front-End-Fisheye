@@ -1,10 +1,16 @@
 #contact_modal {
     display: none;
+    border: 2px solid black;
+    width: 60%;
+    position: absolute;
+    z-index: 30;
+    top: 6em;
 }
 .photograph-header {
     background-color: #FAFAFA;
     height: auto;
     margin: 0 0px;
+    width: 97%;
 }
 
 .contact_button {
@@ -72,4 +78,7 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+}
+textarea {
+    width: 100%;
 }
