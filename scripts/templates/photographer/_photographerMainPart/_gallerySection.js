@@ -1,9 +1,10 @@
+
+import { _lightboxModal } from "./_lightboxModal.js";
 import { _likePartialeScript, _likePartialeTemplate } from "./_likePartiale.js";
 
 export const _gallerySection = (sortedMediasData, phData) => {
 
 	const $gallery = document.querySelector('#gallery')
-	const $modalImg = document.querySelector('.modal-contend')
 	$gallery.innerHTML = ''
 
 	console.table(sortedMediasData);
@@ -37,6 +38,8 @@ export const _gallerySection = (sortedMediasData, phData) => {
 		_likePartialeScript(el.likes);
 
 	});
-	$modalImg.forEach($imgTag.addEventListener("click", lightboxHandler))
+	//add event for open and close modal lightbox
+	const $modalImgs = document.querySelectorAll('.galleryImg-container img, video')
+	$modalImgs.forEach($imgTag => $imgTag.addEventListener("click", () => _lightboxModal()))
 };
 

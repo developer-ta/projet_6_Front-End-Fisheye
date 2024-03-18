@@ -1,5 +1,5 @@
 // import { photographerTemplate } from './../accueil/index.js';
-import { _lightboxModal } from './_lightboxModal.js';
+import { _lightboxModal } from './_photographerMainPart/_lightboxModal.js';
 import { _ProfilePartiale } from './_photographerMainPart/_ProfilePartiale.js';
 import { _likeTotalPartiale } from './_photographerMainPart/_likeTotalPartiale.js';
 import { _sortSelectGalleryPartiale } from './_photographerMainPart/_sortSelectGalleryPartiale.js';
@@ -17,7 +17,7 @@ export const _mainSection = (mediasData, phData) => {
 
 	//part 4
 	debugger
-	_lightboxModal();
+	//_lightboxModal();
 
 };
 
