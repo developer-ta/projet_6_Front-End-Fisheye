@@ -1,10 +1,47 @@
-//form modal
-const _formModal = () => {
+import { closeModal } from "../../services/utils/contactForm.js";
 
+//form modal
+export const _formModal = () => {
+	debugger;
+
+	const $submit_btn = document.querySelector('form .contact_button')
+
+
+	$submit_btn.addEventListener('click', (ev) => {
+		ev.preventDefault();
+		debugger
+
+		let formValidator = new FormValidator()
+		const { ok, canSandData } = formValidator.initForm();
+
+		//el Dom
+		const $form = document.querySelector('form')
+		const $succeed_el = document.querySelector('form .succeed')
+
+		if ($succeed_el) {
+			formDefault($submit_btn, $form);
+		}
+		else if (ok) {
+			$form.childNodes.forEach(el => el.style.display = 'none')
+			$form.insertAdjacentHTML('beforebegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
+			$submit_btn.textContent = 'fermé'
+
+			console.log('canSandData: ', canSandData);
+
+		}
+	})
 
 };
+// init form default state
+function formDefault(submit_btn, form) {
+	debugger
+	form.childNodes.forEach(el => el.style.display = 'block')
+	form.removeChild($succeed_el)
+	submit_btn.textContent = 'Envoyer'
+	//closeModal();
+}
 
-class formValidator {
+class FormValidator {
 	constructor () {
 		//this.firstNameValidate = this.beValidateObj;
 		this.formData = {};
@@ -27,11 +64,12 @@ class formValidator {
 
 	// prénom
 	get name() {
+		debugger
 		const $name_in = document.querySelector('#contact_modal #name');
-		beValidateName = this.beValidateObj
-		this.beValidateName.elValue = $name_in.value;
-		this.beValidateName.regexpStr = '^[a-zA-Z._-]+$';
-		this.beValidateName.errorMg = {
+		const beValidateName = this.beValidateObj
+		beValidateName.elValue = $name_in.value;
+		beValidateName.regexpStr = '^[a-zA-Z._-]+$';
+		beValidateName.errorMg = {
 			empty: 'Veuillez entrer votre nom.',
 			invalid: 'Le nom que vous avez saisi est invalide. Veuillez réessayer.',
 		}
@@ -42,59 +80,67 @@ class formValidator {
 
 	}
 	get firstName() {
-
+		debugger
 		const $firstName_in = document.querySelector('#contact_modal #firstName');
-		beValidateFirstName = this.beValidateObj
-		this.beValidateFirstName.elValue = $firstName_in.value;
-		this.beValidateFirstName.regexpStr = '^[a-zA-Z._-]+$';
-		this.beValidateFirstName.errorMg = {
+		const beValidateFirstName = this.beValidateObj
+		beValidateFirstName.elValue = $firstName_in.value;
+		beValidateFirstName.regexpStr = '^[a-zA-Z._-]+$';
+		beValidateFirstName.errorMg = {
 			empty: 'Veuillez entrer votre prénom.',
 			invalid: 'Le prénom que vous avez saisi est invalide. Veuillez réessayer.',
 		}
-		const validatedObj = this.validator(beValidateFirstName, $firstName_in)
+		const validatedObj = this.validator(beValidateFirstName, $firstName_in, 'firstName')
 		return validatedObj.isValide;
 
 	}
 	get email() {
-
+		debugger
 		const $email_in = document.querySelector('#contact_modal #email');
-		beValidateEmail = this.beValidateObj
-		this.beValidateEmail.elValue = $email_in.value;
-		this.beValidateEmail.regexpStr = '[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+';
-		this.beValidateEmail.errorMg = {
+		const beValidateEmail = this.beValidateObj
+		beValidateEmail.elValue = $email_in.value;
+		beValidateEmail.regexpStr = '[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+';
+		beValidateEmail.errorMg = {
 			empty: 'Veuillez entrer une adresse email valide.',
 			invalid: "L'adresse email que vous avez saisie est invalide. Veuillez réessayer.",
 		}
 
-		const validatedObj = this.validator(beValidateEmail, $email_in)
+		const validatedObj = this.validator(beValidateEmail, $email_in, 'email')
 		return validatedObj.isValide;
 	}
 	get MessageUser() {
 
 		const $message_in = document.querySelector('#contact_modal #message');
-		this.beValidateObj.elValue = $message_in.value;
+		this.formData[`MessageUser`] = $message_in.value;
 
 
 	}
 	validator = (objValidate, $formEl, typeInput) => {
 
 		if (objValidate.elValue && new RegExp(objValidate.regexpStr).test(objValidate.elValue.trim())) {
-			this.formData['typeInput'] = elValue;
+			this.formData[`${typeInput}`] = objValidate.elValue;
 			objValidate.isValide = true;
 			$formEl.value = '';
 			return objValidate;
 		}
-		let errorMg = objValidate.elValue ? objValidate.errorMg.invalid : objValidate.errorMg.empty;
-		$error_span = `<span class="error">${errorMg}</span>`
-		$formEl.insertAdjacentHtml('afterend', $error_span)
+		let error = objValidate.elValue ? objValidate.errorMg.invalid : objValidate.errorMg.empty;
+		const $error_span = `<span class="error">${error}</span>`
+		$formEl.insertAdjacentHTML('afterend', $error_span)
 		return objValidate;
 	}
 
 	initForm() {
-		if (this.name && this.firstName && this.email) {
-
+		debugger;
+		if (this.name & this.firstName & this.email) {
+			return { ok: true, canSandData: this.formData }
 		}
+		return { ok: false, canSandData: {} }
 	}
+
+	formClose() {
+
+	}
+
+
 
 }
 

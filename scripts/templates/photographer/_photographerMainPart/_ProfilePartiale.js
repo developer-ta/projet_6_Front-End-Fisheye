@@ -1,3 +1,4 @@
+import { displayModal } from "../../../services/utils/contactForm.js";
 import { photographerTemplate } from "../../accueil/index.js";
 
 //profile partiale
@@ -13,4 +14,8 @@ export const _ProfilePartiale = (data) => {
 	//$div_profile.insertAdjacentElement('afterend', $img);
 	$img_container.insertAdjacentElement('afterend', $btn_contact);
 	$div_profile.appendChild($profileHtml).setAttribute('data-pageBuilded', 'true');
+	//open modal contact
+	$btn_contact.addEventListener('click', displayModal)
+
+
 };

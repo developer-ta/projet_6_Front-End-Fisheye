@@ -1,9 +1,11 @@
 //import { _ProfilePartiale } from './_photographerProfile.js';
 
+import { _formModal } from "./_formModal.js";
 import { _mainSection } from "./_photographerMain.js";
 
 export const pageBuilder = (MediasData, phData) => {
   _mainSection(MediasData, phData)
+  _formModal();
 };
 
 /**

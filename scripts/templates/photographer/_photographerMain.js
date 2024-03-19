@@ -15,9 +15,7 @@ export const _mainSection = (mediasData, phData) => {
 	//part 3
 	_likeTotalPartiale(mediasData, phData)
 
-	//part 4
-	debugger
-	//_lightboxModal();
+
 
 };
 
