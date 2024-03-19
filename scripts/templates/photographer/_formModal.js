@@ -115,16 +115,28 @@ class FormValidator {
 
 	}
 	validator = (objValidate, $formEl, typeInput) => {
-
+		$formEl.dataset.isError = false;
 		if (objValidate.elValue && new RegExp(objValidate.regexpStr).test(objValidate.elValue.trim())) {
 			this.formData[`${typeInput}`] = objValidate.elValue;
 			objValidate.isValide = true;
 			$formEl.value = '';
+			//if after error input is correct 
+			if ($formEl.dataset.isError) {
+				$formEl.nextSibling.display = 'none'
+				$formEl.dataset.isError = false;
+			}
 			return objValidate;
 		}
-		let error = objValidate.elValue ? objValidate.errorMg.invalid : objValidate.errorMg.empty;
-		const $error_span = `<span class="error">${error}</span>`
-		$formEl.insertAdjacentHTML('afterend', $error_span)
+
+		let errorMg = objValidate.elValue ? objValidate.errorMg.invalid : objValidate.errorMg.empty;
+
+		if (!$formEl.dataset.isError) {
+			let $error_span = `<span class="error" ${errorMg}</span>`
+			$formEl.insertAdjacentHTML('afterend', $error_span)
+			return objValidate
+		}
+		//if error span existe display error Mg
+		$formEl.nextSibling.textContent = errorMg;
 		return objValidate;
 	}
 
