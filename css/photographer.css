@@ -1,6 +1,6 @@
 #contact_modal {
     display: none;
-    border: 2px solid black;
+
     width: 60%;
     position: absolute;
     z-index: 30;
