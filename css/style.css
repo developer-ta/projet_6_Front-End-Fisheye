@@ -3,21 +3,22 @@
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
-    max-width: 95%;
 height: auto;
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+  max-width: 1480px;
 }
 
 
 header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 90px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 90px;
+	width: 100%;
 }
 
 h1 {
@@ -35,12 +36,13 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+    width: 100%;
 }
 
 .photographer_section article {
     justify-self: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
 }
@@ -272,7 +274,7 @@ object-fit: cover;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 100%;
 }
 .error {
     color: red;
