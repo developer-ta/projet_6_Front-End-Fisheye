@@ -121,11 +121,15 @@ object-fit: cover;
             font-weight: bold;
             width: 32%;
             margin: 8rem;
+            position: relative;
+            right: 31%;
         }
 
         #menu div {
             display: flex;
             flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
         }
 
         #select_tri {

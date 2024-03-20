@@ -14,6 +14,10 @@ export const _ProfilePartiale = (data) => {
 	//$div_profile.insertAdjacentElement('afterend', $img);
 	$img_container.insertAdjacentElement('afterend', $btn_contact);
 	$div_profile.appendChild($profileHtml).setAttribute('data-pageBuilded', 'true');
+
+	let $name_h2 = document.querySelector('article h2')
+	let $detail_div = document.querySelector('article .detail-container')
+	$detail_div.insertAdjacentElement('afterbegin', $name_h2) 
 	//open modal contact
 	$btn_contact.addEventListener('click', displayModal)
 

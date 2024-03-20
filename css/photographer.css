@@ -9,8 +9,11 @@
 .photograph-header {
     background-color: #FAFAFA;
     height: auto;
-    margin: 0 0px;
-    width: 97%;
+    margin:0px;
+    width: 89%;
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
 }
 
 .contact_button {
@@ -48,9 +51,9 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
-    text-align: center;
+    font-size: 45px;
+    text-align: start;
+    margin-top: 1px;
 }
 
 form {
@@ -81,4 +84,9 @@ form input {
 }
 textarea {
     width: 100%;
+}
+.closeModal {
+    position: absolute;
+    right: 13rem;
+    padding: 1rem;
 }

@@ -3,59 +3,9 @@ import { closeModal } from "../../services/utils/contactForm.js";
 //form modal
 export const _formModal = () => {
 	debugger;
-
-	//el Dom
-	const $submit_btn = document.querySelector('form .contact_button')
-
-
-
-	$submit_btn.addEventListener('click', (ev) => {
-		ev.preventDefault();
-		debugger
-		const $form = document.querySelector('form')
-		const $div = document.querySelector('form div')
-		const $succeed_el = document.querySelector('form .succeed')
-		const $header_el = document.querySelector('.modal > header:nth-child(1)')
-
-		if ($succeed_el) {
-			formDefault($submit_btn, $div, $succeed_el, $form, $header_el);
-			return
-
-		}
-
-		const formValidator = new FormValidator()
-		const { ok, canSandData } = formValidator.initForm();
-
-		if (ok) {
-			debugger
-
-			$div.style.display = 'none'
-			$header_el.style.display = 'none'
-			$form.insertAdjacentHTML('afterbegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
-			$submit_btn.textContent = 'fermé'
-
-			console.log('canSandData: ', canSandData);
-
-		}
-	})
-
+	const formValidator = new FormValidator()
+	formValidator.initForm();
 };
-// init form default state
-function formDefault(submit_btn, formDiv, succeed_el, form, header_el) {
-	debugger
-
-	formDiv.style.display = 'flex'
-	header_el.style.display = 'block'
-	form.removeChild(succeed_el)
-	submit_btn.textContent = 'Envoyer'
-
-	document.querySelector('#contact_modal #name').value = '';
-	document.querySelector('#contact_modal #firstName').value = '';
-	document.querySelector('#contact_modal #email').value = '';
-	document.querySelector('#contact_modal #message').value = '';
-
-	closeModal();
-}
 
 class FormValidator {
 	constructor () {
@@ -158,19 +108,70 @@ class FormValidator {
 		$formEl.nextSibling.textContent = errorMg;
 		return objValidate;
 	}
-
-	initForm() {
+	checkValidated() {
 		debugger;
+
 		if (this.name & this.firstName & this.email) {
 			return { ok: true, canSandData: this.formData }
 		}
 		return { ok: false, canSandData: {} }
 	}
 
+	formDefault(submit_btn, formDiv, succeed_el, form, header_el) {
+		debugger
+
+		formDiv.style.display = 'flex'
+		header_el.style.display = 'block'
+		form.removeChild(succeed_el)
+		submit_btn.textContent = 'Envoyer'
+
+		document.querySelector('#contact_modal #name').value = '';
+		document.querySelector('#contact_modal #firstName').value = '';
+		document.querySelector('#contact_modal #email').value = '';
+		document.querySelector('#contact_modal #message').value = '';
+
+		closeModal();
+	}
 	formClose() {
+		const $closeModal = document.querySelector('#contact_modal .closeModal');
+		$closeModal.addEventListener('click', closeModal)
 
 	}
+	initForm() {
+		//el Dom
+		const $submit_btn = document.querySelector('form .contact_button')
 
+		$submit_btn.addEventListener('click', (ev) => {
+			ev.preventDefault();
+			debugger
+			const $form = document.querySelector('form')
+			const $div = document.querySelector('form div')
+			const $succeed_el = document.querySelector('form .succeed')
+			const $header_el = document.querySelector('.modal > header:nth-child(1)')
+
+			if ($succeed_el) {
+				this.formDefault($submit_btn, $div, $succeed_el, $form, $header_el);
+				return
+
+			}
+
+
+			const { ok, canSandData } = this.checkValidated();
+
+			if (ok) {
+				debugger
+
+				$div.style.display = 'none'
+				$header_el.style.display = 'none'
+				$form.insertAdjacentHTML('afterbegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
+				$submit_btn.textContent = 'fermé'
+
+				console.log('canSandData: ', canSandData);
+
+			}
+		})
+		this.formClose();
+	}
 
 
 }
