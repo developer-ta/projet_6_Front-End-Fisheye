@@ -5,9 +5,9 @@ function displayModal(ev) {
 	modal.style.display = "block";
 }
 
-function closeModal(ev) {
+function closeModal() {
     debugger;
-    ev.preventDefault();
+
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 

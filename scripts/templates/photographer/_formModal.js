@@ -4,26 +4,29 @@ import { closeModal } from "../../services/utils/contactForm.js";
 export const _formModal = () => {
 	debugger;
 
+	//el Dom
 	const $submit_btn = document.querySelector('form .contact_button')
+
 
 
 	$submit_btn.addEventListener('click', (ev) => {
 		ev.preventDefault();
 		debugger
-
-		let formValidator = new FormValidator()
-		const { ok, canSandData } = formValidator.initForm();
-
-		//el Dom
 		const $form = document.querySelector('form')
+		const $div = document.querySelector('form div')
 		const $succeed_el = document.querySelector('form .succeed')
 
 		if ($succeed_el) {
-			formDefault($submit_btn, $form);
+			formDefault($submit_btn, $div, $succeed_el, $form);
 		}
-		else if (ok) {
-			$form.childNodes.forEach(el => el.style.display = 'none')
-			$form.insertAdjacentHTML('beforebegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
+
+		const formValidator = new FormValidator()
+		const { ok, canSandData } = formValidator.initForm();
+
+		if (ok) {
+			debugger
+			$div.style.display = 'none'
+			$form.insertAdjacentHTML('afterbegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
 			$submit_btn.textContent = 'fermé'
 
 			console.log('canSandData: ', canSandData);
@@ -33,12 +36,12 @@ export const _formModal = () => {
 
 };
 // init form default state
-function formDefault(submit_btn, form) {
+function formDefault(submit_btn, formDiv, succeed_el, form) {
 	debugger
-	form.childNodes.forEach(el => el.style.display = 'block')
-	form.removeChild($succeed_el)
+	formDiv.style.display = 'block'
+	form.removeChild(succeed_el)
 	submit_btn.textContent = 'Envoyer'
-	//closeModal();
+	closeModal();
 }
 
 class FormValidator {
@@ -98,7 +101,7 @@ class FormValidator {
 		const $email_in = document.querySelector('#contact_modal #email');
 		const beValidateEmail = this.beValidateObj
 		beValidateEmail.elValue = $email_in.value;
-		beValidateEmail.regexpStr = '[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+';
+		beValidateEmail.regexpStr = '[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+';//const regExEmail = '[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+';
 		beValidateEmail.errorMg = {
 			empty: 'Veuillez entrer une adresse email valide.',
 			invalid: "L'adresse email que vous avez saisie est invalide. Veuillez réessayer.",
@@ -115,14 +118,16 @@ class FormValidator {
 
 	}
 	validator = (objValidate, $formEl, typeInput) => {
-		$formEl.dataset.isError = false;
-		if (objValidate.elValue && new RegExp(objValidate.regexpStr).test(objValidate.elValue.trim())) {
+		//$formEl.dataset.isError = false;
+		if (new RegExp(objValidate.regexpStr).test(objValidate.elValue.trim())) {
 			this.formData[`${typeInput}`] = objValidate.elValue;
 			objValidate.isValide = true;
-			$formEl.value = '';
+
 			//if after error input is correct 
 			if ($formEl.dataset.isError) {
-				$formEl.nextSibling.display = 'none'
+				//$formEl.nextSibling.display = 'none'
+
+				$formEl.nextSibling.textContent = ''
 				$formEl.dataset.isError = false;
 			}
 			return objValidate;
@@ -131,8 +136,9 @@ class FormValidator {
 		let errorMg = objValidate.elValue ? objValidate.errorMg.invalid : objValidate.errorMg.empty;
 
 		if (!$formEl.dataset.isError) {
-			let $error_span = `<span class="error" ${errorMg}</span>`
+			let $error_span = `<span class="error">${errorMg}</span>`
 			$formEl.insertAdjacentHTML('afterend', $error_span)
+			$formEl.dataset.isError = true;
 			return objValidate
 		}
 		//if error span existe display error Mg
