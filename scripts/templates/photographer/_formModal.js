@@ -18,6 +18,8 @@ export const _formModal = () => {
 
 		if ($succeed_el) {
 			formDefault($submit_btn, $div, $succeed_el, $form);
+			return
+
 		}
 
 		const formValidator = new FormValidator()
@@ -25,6 +27,7 @@ export const _formModal = () => {
 
 		if (ok) {
 			debugger
+
 			$div.style.display = 'none'
 			$form.insertAdjacentHTML('afterbegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
 			$submit_btn.textContent = 'fermé'
@@ -38,9 +41,16 @@ export const _formModal = () => {
 // init form default state
 function formDefault(submit_btn, formDiv, succeed_el, form) {
 	debugger
-	formDiv.style.display = 'block'
+
+	formDiv.style.display = 'flex'
 	form.removeChild(succeed_el)
 	submit_btn.textContent = 'Envoyer'
+
+	document.querySelector('#contact_modal #name').value = '';
+	document.querySelector('#contact_modal #firstName').value = '';
+	document.querySelector('#contact_modal #email').value = '';
+	document.querySelector('#contact_modal #message').value = '';
+
 	closeModal();
 }
 

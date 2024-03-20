@@ -269,3 +269,7 @@ object-fit: cover;
     justify-content: center;
     align-items: center;
 }
+.error {
+    color: red;
+    text-align: end;
+}
