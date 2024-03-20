@@ -15,9 +15,10 @@ export const _formModal = () => {
 		const $form = document.querySelector('form')
 		const $div = document.querySelector('form div')
 		const $succeed_el = document.querySelector('form .succeed')
+		const $header_el = document.querySelector('.modal > header:nth-child(1)')
 
 		if ($succeed_el) {
-			formDefault($submit_btn, $div, $succeed_el, $form);
+			formDefault($submit_btn, $div, $succeed_el, $form, $header_el);
 			return
 
 		}
@@ -29,6 +30,7 @@ export const _formModal = () => {
 			debugger
 
 			$div.style.display = 'none'
+			$header_el.style.display = 'none'
 			$form.insertAdjacentHTML('afterbegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
 			$submit_btn.textContent = 'fermé'
 
@@ -39,10 +41,11 @@ export const _formModal = () => {
 
 };
 // init form default state
-function formDefault(submit_btn, formDiv, succeed_el, form) {
+function formDefault(submit_btn, formDiv, succeed_el, form, header_el) {
 	debugger
 
 	formDiv.style.display = 'flex'
+	header_el.style.display = 'block'
 	form.removeChild(succeed_el)
 	submit_btn.textContent = 'Envoyer'
 

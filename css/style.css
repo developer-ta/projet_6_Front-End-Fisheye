@@ -273,3 +273,11 @@ object-fit: cover;
     color: red;
     text-align: end;
 }
+.succeed {
+    background-color: #db8876;
+    color: ghostwhite;
+    width: 100%;
+    text-align: center;
+    height: 10em;
+    font-size: xx-large;
+}
