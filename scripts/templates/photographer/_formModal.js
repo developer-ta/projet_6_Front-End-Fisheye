@@ -9,12 +9,13 @@ export const _formModal = () => {
 
 class FormValidator {
 	constructor () {
-		//this.firstNameValidate = this.beValidateObj;
+
 		this.formData = {};
 
 	}
-	//interface obj
+	// make interface obj validate
 	get beValidateObj() {
+
 		const validateObj = {
 			elValue: '',
 			errorMg: {
@@ -45,8 +46,9 @@ class FormValidator {
 		return validatedObj.isValide;
 
 	}
+	//nom
 	get firstName() {
-		debugger
+
 		const $firstName_in = document.querySelector('#contact_modal #firstName');
 		const beValidateFirstName = this.beValidateObj
 		beValidateFirstName.elValue = $firstName_in.value;
@@ -81,14 +83,14 @@ class FormValidator {
 
 	}
 	validator = (objValidate, $formEl, typeInput) => {
-		//$formEl.dataset.isError = false;
+
 		if (new RegExp(objValidate.regexpStr).test(objValidate.elValue.trim())) {
 			this.formData[`${typeInput}`] = objValidate.elValue;
 			objValidate.isValide = true;
 
 			//if after error input is correct 
 			if ($formEl.dataset.isError) {
-				//$formEl.nextSibling.display = 'none'
+
 
 				$formEl.nextSibling.textContent = ''
 				$formEl.dataset.isError = false;
@@ -108,8 +110,8 @@ class FormValidator {
 		$formEl.nextSibling.textContent = errorMg;
 		return objValidate;
 	}
+
 	checkValidated() {
-		debugger;
 
 		if (this.name & this.firstName & this.email) {
 			return { ok: true, canSandData: this.formData }
@@ -132,11 +134,13 @@ class FormValidator {
 
 		closeModal();
 	}
+
 	formClose() {
 		const $closeModal = document.querySelector('#contact_modal .closeModal');
 		$closeModal.addEventListener('click', closeModal)
 
 	}
+
 	initForm() {
 		//el Dom
 		const $submit_btn = document.querySelector('form .contact_button')
@@ -155,11 +159,10 @@ class FormValidator {
 
 			}
 
-
 			const { ok, canSandData } = this.checkValidated();
 
 			if (ok) {
-				debugger
+
 
 				$div.style.display = 'none'
 				$header_el.style.display = 'none'
@@ -170,9 +173,9 @@ class FormValidator {
 
 			}
 		})
+
 		this.formClose();
 	}
-
 
 }
 

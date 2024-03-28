@@ -4,23 +4,19 @@ import { Factory } from './../services/router/factory.js';
 
 class App {
   constructor() {
-    debugger;
+
     this.fetchApi = new FetchApi();
   }
   async main() {
-    debugger;
 
     //api
     this.allData = await this.fetchApi.getAllData('/data/photographers.json');
-    //models
+
+    //init models
     new ViewModel(this.allData);
+    //page
     Factory.prototype.getPage();
-    // this.photographers = this.vm.getPhotographeList();
-    // this.medias = this.vm.getMediaList();
-    //routage
-    //navigatePage();
-    //this.router.getNewPage(photographersVm);
-    //views controller
+
   }
 }
 

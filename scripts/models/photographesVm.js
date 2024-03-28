@@ -1,36 +1,50 @@
 export class ViewModel {
   constructor ({ photographers, media }) {
-    debugger;
+
+    //singleton pattern
     if (this.isExisteVm) {
       return ViewModel.instanceVm;
     }
+
     this._photographeList = photographers;
     this._photographe;
     this._media = media;
+
     if (this._photographeList && this._media) {
       this.setLocalStorage();
     }
+
     this.isExisteVm = true;
     ViewModel.instanceVm = this;
   }
-
+  //Photographes List
   getPhotographeList() {
+
     if (this._photographeList) {
+
       return this._photographeList;
+
     } else {
+
       this._photographeList = this.getLocalStorage('photographeList');
-      debugger;
+
       return this._photographeList ?? '';
     }
   }
+  //get one Photographe
   getPhotographeById(id) {
+
     if (this._photographeList) {
+
       return (this._photographe = this._photographeList.find((el) => el.id == id));
     } else {
+
       let photographe = this.getLocalStorage(id);
+
       return photographe ? this._photographeList.find((el) => el.id == id) : '';
     }
   }
+  //get medias data list
   getMediaList() {
     if (this._media) {
       return this._media;
@@ -39,7 +53,9 @@ export class ViewModel {
       return this._media ?? '';
     }
   }
+  //stock data
   setLocalStorage() {
+
     if (this._photographeList) {
       localStorage.setItem('photographeList', JSON.stringify(this._photographeList));
     }
@@ -47,10 +63,13 @@ export class ViewModel {
       localStorage.setItem('mediaList', JSON.stringify(this._media));
     }
   }
+  // get data
   getLocalStorage(keyName) {
-    debugger;
+
     if (localStorage.getItem(keyName)) {
+
       let val = localStorage.getItem(keyName);
+
       if (val != null) {
         return JSON.parse(val);
       }
@@ -62,10 +81,3 @@ export class ViewModel {
 export const getAllModel = (data) => new ViewModel(data);
 
 
-// "name": "Mimi Keel",
-// 	"id": 243,
-// 	"city": "London",
-// 	"country": "UK",
-// 	"tagline": "Voir le beau dans le quotidien",
-// 	"price": 400,
-// 	"portrait": "MimiKeel.jpg"

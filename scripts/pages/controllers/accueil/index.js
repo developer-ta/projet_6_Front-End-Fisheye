@@ -16,6 +16,7 @@ async function displayData(photographers) {
 }
 // 1 e
 export async function init(photographersData) {
+
   // Récupère les datas des photographes
   const photographers = photographersData;
 

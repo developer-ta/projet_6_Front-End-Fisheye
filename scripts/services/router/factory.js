@@ -2,7 +2,7 @@ import { ViewModel } from '../../models/photographesVm.js';
 import { init } from '../../pages/controllers/accueil/index.js';
 import { renderPage } from '../../pages/controllers/photographes/photographe.js';
 
-//import { renderPage } from './../../pages/controllers/photographes/photographe.js';
+
 export class Factory {
   constructor() {}
   get pathName() {
@@ -23,24 +23,27 @@ export class Factory {
   }
 
   getPage() {
-    console.log('Inside Factory.getPage()');
-    debugger;
+
     const { photographers, medias } = this.models;
 
+    //check url of navigator 
     if (this.pathName === '/photographer.html') {
+
       let photographer = photographers.find((ph) => ph.id == this.pathParams);
+
       let mediaList = medias.filter((ph) => ph.photographerId == this.pathParams);
 
-
       if (photographer && mediaList) {
-        //page photographer
+
+        // for page photographer
         renderPage(mediaList, photographer);
         return;
       } else {
         throw new Error(`Photographe  id = ${this.pathParams?.id} existe pas !`);
       }
-
+      // for page accueil
     } else if (this.pathName === '/index.html' || this.pathName === '/') {
+
       //page accueil
       init(photographers);
     }

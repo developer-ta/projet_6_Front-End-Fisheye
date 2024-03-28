@@ -11,8 +11,6 @@ export const _likePartialeTemplate = (mediaData) => {
 
 	return $like_html;
 
-
-
 };
 
 //script of _likePartialeTemplate
@@ -36,7 +34,6 @@ export const _likePartialeScript = () => {
 		//remove event linked to counterLike
 		ev.target.removeEventListener("click", counterLike)
 
-
 	}
 
 	for (const $hart of $hartLikes) {
@@ -44,12 +41,14 @@ export const _likePartialeScript = () => {
 	}
 
 }
+
 const calculLikes = () => {
 
 	let existeLikes = localStorage.getItem("totalLikes")
 	const $sum_likes = document.getElementById('sum_likes');
 	if ($sum_likes && existeLikes) {
 		existeLikes++;
+
 		//update localStorage
 		localStorage.setItem("totalLikes", existeLikes)
 		$sum_likes.textContent = existeLikes;

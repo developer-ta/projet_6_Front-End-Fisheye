@@ -9,6 +9,7 @@ export const _gallerySection = (sortedMediasData, phData) => {
 
 	console.table(sortedMediasData);
 	sortedMediasData.forEach(el => {
+
 		let mediaUrl = `${phData.name.split(' ')[0].includes('-')
 			? phData.name.split(' ')[0].split('-').join(' ')
 			: phData.name.split(' ')[0]}/`;
@@ -20,10 +21,13 @@ export const _gallerySection = (sortedMediasData, phData) => {
 
 		//  verifiers que type image ou vidions
 		if (el.image) {
+
 			mediaUrl += `${el.image}`
 			picture += mediaUrl
 			$media_html += `<img src="${picture}">`
+
 		} else if (el.video) {
+
 			mediaUrl += `${el.video}`
 			video += mediaUrl
 			$media_html += `<video  controls ><source src="${video}"></video>`

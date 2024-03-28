@@ -4,9 +4,12 @@ export function photographerTemplate(data) {
   const picture = `/assets/Sample Photos/Photographers-ID-Photos/${portrait}`;
 
   function getUserCardDOM() {
+
+    //Dom element
     let $article = document.createElement('article');
     $article.setAttribute('id', `${id}`);
-    // <div class=".card-container"></div>
+
+    //template index
     let html = `
 <div class="img-container"><img src="${picture}"></div>
 <h2>${name}</h2>
@@ -18,7 +21,7 @@ export function photographerTemplate(data) {
     $article.innerHTML = html;
 
     if (location.pathname === '/index.html' || location.pathname === '/') {
-      const $h2 = $article.querySelector('h2');
+
       const $img = $article.querySelector('.img-container');
       $img.addEventListener('click', (ev) => {
         ev.preventDefault();

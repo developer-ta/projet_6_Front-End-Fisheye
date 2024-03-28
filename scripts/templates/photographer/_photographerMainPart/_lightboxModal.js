@@ -15,7 +15,6 @@ export const _lightboxModal = () => {
 	<h3 id="title_lightbox">Lonesome</h3>
 	</div>`;
 
-
 	//script js
 	//Dom el
 	const $lightBox_centenaire = document.querySelector('.lightbox')
@@ -27,34 +26,6 @@ export const _lightboxModal = () => {
 	const $next_span = $lightBox_centenaire.querySelector('.next')
 	const $imgList = document.querySelectorAll("#gallery img");
 
-
-
-	//function for open or close lightbox
-	// const lightboxHandler = (ev) => {
-	// 	debugger
-	// 	ev.preventDefault();
-
-
-	// 	if ($gallery.style.display !== 'none') {
-	// 		$gallery.style.display = 'none'
-
-	// 	} else {
-	// 		$gallery.style.display = 'flex'
-	// 	}
-	// 	if ($lightBox_centenaire.style.display !== 'flex') {
-	// 		$lightBox_centenaire.style.display = 'flex'
-	// 	} else {
-
-	// 		$lightBox_centenaire.style.display = 'none'
-	// 	}
-	// 	//img display in modal 
-	// 	const imgUrl = ev.target.src;
-	// 	$modalImg.index = ev.target.imgIndex
-	// 	$modalImg.src = imgUrl;
-
-
-	// }
-	//console.log('$imgList: ', $imgList);
 	//list of src to imgs
 	const _srcList = []
 	//set src img in element Dom
@@ -90,8 +61,6 @@ export const _lightboxModal = () => {
 	$next_span.addEventListener("click", carouselImg);
 
 
-	//console.log('$imgList: ', $imgList[0].firstChild.srcByIndex);
-
 };
 
 
@@ -102,6 +71,8 @@ const carouselImg = (ev) => {
 	const $gallery = document.getElementById('gallery');
 	const imgList = $gallery.srcList;
 	let imgIndex = $currentModalImg.index;
+
+	//check max length 
 	if ((imgIndex - 1) < 0) {
 		imgIndex = imgList.length - 1
 	} else if ((imgIndex + 1) >= imgList.length) {
@@ -112,39 +83,38 @@ const carouselImg = (ev) => {
 
 		$currentModalImg.src = imgList[imgIndex - 1]
 		$currentModalImg.index = imgIndex - 1
-		console.log('imgIndex: ', imgIndex);
-		console.log('$currentModalImg.src: ', $currentModalImg.src);
+
 	} else if (ev.target.classList[0] == 'next') {
 
 		$currentModalImg.src = imgList[imgIndex + 1]
 		$currentModalImg.index = imgIndex + 1
 	}
-	debugger;
-
-
 
 }
 
 
-
 export const lightboxHandler = (ev) => {
-	debugger
+
 	ev.preventDefault();
 
 	//Dom el
 	const $lightBox_centenaire = document.querySelector('.lightbox')
 
 	const $modalImg = document.querySelector('.modal-contend')
+
 	const $gallery = document.getElementById('gallery');
 	
 	
 	if ($gallery.style.display !== 'none') {
+
 		$gallery.style.display = 'none'
 
 	} else {
+
 		$gallery.style.display = 'flex'
 	}
 	if ($lightBox_centenaire.style.display !== 'flex') {
+
 		$lightBox_centenaire.style.display = 'flex'
 	} else {
 
@@ -154,6 +124,5 @@ export const lightboxHandler = (ev) => {
 	const imgUrl = ev.target.src;
 	$modalImg.index = ev.target.imgIndex
 	$modalImg.src = imgUrl;
-
 
 }

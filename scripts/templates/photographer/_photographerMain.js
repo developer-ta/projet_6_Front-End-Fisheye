@@ -6,6 +6,7 @@ import { _sortSelectGalleryPartiale } from './_photographerMainPart/_sortSelectG
 
 //main part
 export const _mainSection = (mediasData, phData) => {
+
 	//part 1
 	_ProfilePartiale(phData);
 
