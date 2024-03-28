@@ -8,7 +8,7 @@ export const _likeTotalPartiale = (mediaListData, phData) => {
 	let likeTotal_html = `
 	<div class="like-total">
 	<p id="sum_likes">${sumLikes}  </p>
-	<span class="total-like">&#x2665;</span>
+	<span class="total-like"><i class="fa-solid fa-heart"></i></span>
 	<p id="Price">${phData.price}€/jour</p>
 	</div>`
 

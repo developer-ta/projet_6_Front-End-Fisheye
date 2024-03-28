@@ -2,35 +2,77 @@ import { _gallerySection } from "./_gallerySection.js";
 
 export const _sortSelectGalleryPartiale = (mediasData, phData) => {
 
-	let menu_html = `<div>
+	// let menu_html = `<div>
+	// <label for="menu-tri">Trier par</label>
+	// <select name="menu-tri" id="select_tri">
+	// <option value="Popularité" selected>Popularité</option>
+	// <option value="Date">Date</option>
+	// <option value="Titre">Titre</option>
+	// </select>
+	// </div>`
+
+	let menu_html = `  <div>
 	<label for="menu-tri">Trier par</label>
-	<select name="menu-tri" id="select_tri">
-	<option value="Popularité" selected>Popularité</option>
-	<option value="Date">Date</option>
-	<option value="Titre">Titre</option>
-	</select>
-	</div>`
+	<div name="menu-tri"id="select_tri">
+	  <div class="popularity" id="select">Popularité<span id='open-options'><i class="fa-solid fa-chevron-down"></i></span></div>
+	  <div class="date">Date</div>
+	  <div class="title">Titre</div>
+	</div> 
+  </div>`
 
 	let sortList;
 	const $menuSection = document.querySelector('#menu')
 	$menuSection.innerHTML = menu_html;
 
 	// Dom elements in $menuSection
+	const $select = $menuSection.querySelector('#select')
 	const $select_tri = $menuSection.querySelector('#select_tri')
+	const $open_options = $select.querySelector('#open-options')
+	const $i = $select.querySelector('#open-options>i')
+	const $date = $menuSection.querySelector('.date')
+	$date.style.display = 'none'
+	const $title = $menuSection.querySelector('.title')
+	$title.style.display = 'none'
+	$select.selectedVal = $select.textContent;
 
 
-	//check onchange
-	$select_tri.addEventListener('change', ev => {
+	//bine event click
+	$open_options.addEventListener('click', ev => {
+		ev.stopPropagation();
 		ev.preventDefault();
+		debugger
 
-		if ($select_tri.value == 'Popularité') {
+		$title.style.display = $title.style.display == 'block' ? 'none' : 'block'
+		$date.style.display = $date.style.display == 'block' ? 'none' : 'block'
+		$select_tri.style.backgroundColor = $select_tri.style.backgroundColor === '' ? '#901C1C' : '';
+		$i.className = $i.className === 'fa-solid fa-chevron-up' ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up'
+
+
+	});
+	$date.addEventListener('click', ev => {
+		ev.preventDefault();
+		debugger
+		$select.selectedVal = $date.textContent;
+		$select.dispatchEvent(new Event('click'));
+
+	});
+	$title.addEventListener('click', ev => {
+		ev.preventDefault();
+		$select.selectedVal = $title.textContent;
+		$select.dispatchEvent(new Event('click'));
+
+	});
+	$select.addEventListener('click', ev => {
+		ev.preventDefault();
+		debugger
+		if ($select.selectedVal == 'Popularité') {
 			sortList = mediasData.sort(function (a, b) { return b.likes - a.likes });
 
-			//by default popularité select
+			//by default Popularité  select
 			_gallerySection(sortList, phData)
 		}
 
-		else if ($select_tri.value == "Date") {
+		else if ($select.selectedVal == "Date") {
 
 			sortList = mediasData.sort(function (a, b) {
 				return new Date(a.date) - new Date(b.date)
@@ -39,7 +81,7 @@ export const _sortSelectGalleryPartiale = (mediasData, phData) => {
 			_gallerySection(sortList, phData)
 		}
 
-		else if ($select_tri.value == "Titre") {
+		else if ($select.selectedVal == "Titre") {
 			//trier par Alphabet
 			sortList = mediasData.sort((a, b) => a.title.localeCompare(b.title));
 
@@ -47,8 +89,8 @@ export const _sortSelectGalleryPartiale = (mediasData, phData) => {
 		}
 
 	});
-
+	debugger;
 	// call by default first time
-	$select_tri.dispatchEvent(new Event('change'));
+	$select.dispatchEvent(new Event('click'));
 
 };

@@ -121,31 +121,57 @@ object-fit: cover;
             height: 1rem;
             font-size: 20px;
             font-weight: bold;
-            width: 32%;
-            margin: 8rem;
             position: relative;
             right: 31%;
+            width: 22%;
+            margin-top: 4rem;
+            margin-bottom: 7rem;
         }
 
-        #menu div {
+        #menu>div {
             display: flex;
             flex-direction: row;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: flex-start;
         }
-
+        label {
+            width: 100%;
+        }
         #select_tri {
             font-size: 20px;
             font-weight: bold;
             color: white;
             padding: 11px;
-            width: 200px;
             height: 90px;
             border: none;
-            background-color: #901C1C;
             border-radius: 5px;
             cursor: pointer;
-        }
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            width: 100%;
+            }
+
+            #select {
+                border-bottom: 2px solid white;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                margin-bottom: 4px;
+                padding: 3px;
+                background-color: #901C1C;
+            }
+
+            .title {}
+
+            .date {
+                border-bottom: 2px solid white;
+                width: 100%;
+                margin-bottom: 4px;
+                padding: 3px;
+          }
         .like-container {
             display: flex;
             flex-direction: row;
@@ -287,4 +313,16 @@ object-fit: cover;
     text-align: center;
     height: 10em;
     font-size: xx-large;
+}
+h4 {
+    color: #901C1C;
+}
+
+p:nth-child(3) {
+    color: #525252;
+}
+
+.contact_button:hover {
+    background-color: #D3573C;
+    color: black;
 }
