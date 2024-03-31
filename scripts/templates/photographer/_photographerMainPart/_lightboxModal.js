@@ -45,7 +45,7 @@ export const _lightboxModal = () => {
 			photoName: '',
 		}
 		const $mediaTag = $mediaList[i];
-		debugger
+
 		if ($mediaTag.tagName === 'VIDEO') {
 
 			mediaInfo.src = $mediaTag.firstChild.src
@@ -81,13 +81,14 @@ export const _lightboxModal = () => {
 	//Carousel img
 	$previous_span.addEventListener("click", carouselImg);
 	$next_span.addEventListener("click", carouselImg);
+	document.body.addEventListener("keydown", keyDownHandler);
 
 
 };
 
 
 const carouselImg = (ev) => {
-	debugger;
+	;
 
 
 	const $lightboxContent = document.querySelector('.img-lightbox')
@@ -111,7 +112,7 @@ const carouselImg = (ev) => {
 
 
 	if (ev.target.classList[0] == 'previous') {
-		debugger
+
 		if ((index - 1) < 0) {
 			index = mediaList.length
 		} 
@@ -156,8 +157,8 @@ export const lightboxHandler = (ev) => {
 
 		$lightBox_centenaire.style.display = 'none'
 	}
-	//img display in modal 
-	debugger
+	//img display in modal
+
 	checkMedia(ev.target.imgIndex, mediaList)
 
 
@@ -167,28 +168,53 @@ export const lightboxHandler = (ev) => {
 function checkMedia(imgIndex, mediaList) {
 	debugger
 
+	const elementInfo = mediaList.find(x => x.imgIndex == imgIndex);
 
 	const $lightboxContent = document.querySelector('.img-lightbox')
 	const $title_lightbox = document.querySelector('#title_lightbox')
 
 
-	let elInfo = mediaList.find(x => x.imgIndex == imgIndex);
-	if (elInfo.tagName === 'video') {
+	if (elementInfo.tagName === 'video') {
 		$lightboxContent.firstElementChild.style.display = 'none';
 		$lightboxContent.lastElementChild.style.display = 'block';
-		$lightboxContent.lastElementChild.src = elInfo.src
-		debugger
-		$lightboxContent.lastElementChild.index = elInfo.imgIndex
-		$title_lightbox.textContent = elInfo.photoName
+		$lightboxContent.lastElementChild.src = elementInfo.src
+
+		$lightboxContent.lastElementChild.index = elementInfo.imgIndex
+		$title_lightbox.textContent = elementInfo.photoName
 		return $lightboxContent.lastElementChild
 
 	}
 	$lightboxContent.firstElementChild.style.display = 'block'
 	$lightboxContent.lastElementChild.style.display = 'none';
-	$lightboxContent.firstElementChild.src = elInfo.src
-	$lightboxContent.firstElementChild.index = elInfo.imgIndex
-	$title_lightbox.textContent = elInfo.photoName
+	$lightboxContent.firstElementChild.src = elementInfo.src
+	$lightboxContent.firstElementChild.index = elementInfo.imgIndex
+	$title_lightbox.textContent = elementInfo.photoName
 	return $lightboxContent.firstElementChild 
 
 
 }
+
+function keyDownHandler(event) {
+	event.preventDefault()
+	debugger
+	const $lightBox_centenaire = document.querySelector('.lightbox')
+
+	const $previous_span = $lightBox_centenaire.querySelector('.previous')
+	const $next_span = $lightBox_centenaire.querySelector('.next')
+	const $close_span = $lightBox_centenaire.querySelector('.close')
+	const eventClick = new Event("click");
+	if ($lightBox_centenaire.style.display = 'flex') {
+		if (event.key == 'ArrowLeft') {
+			$previous_span.dispatchEvent(eventClick)
+		}
+		else if (event.key == 'ArrowRight') {
+			$next_span.dispatchEvent(eventClick)
+		}
+		else if (event.key == 'Escape') {
+			$close_span.dispatchEvent(eventClick)
+
+		}
+	}
+
+}
+

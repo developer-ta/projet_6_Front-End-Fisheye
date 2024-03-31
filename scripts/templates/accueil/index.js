@@ -25,7 +25,7 @@ export function photographerTemplate(data) {
       const $img = $article.querySelector('.img-container');
       $img.addEventListener('click', (ev) => {
         ev.preventDefault();
-        debugger;
+
         history.pushState({ id: $article.id }, '', '/photographer.html');
         console.log('$article: ', history.state);
         localStorage.setItem('id', `${$article.id}`);

@@ -1,5 +1,5 @@
 export const _likePartialeTemplate = (mediaData) => {
-	debugger
+	
 	const $like_html =
 		`<div class="like-container">
 	<p id="title">${mediaData.title}</p>
@@ -24,7 +24,7 @@ export const _likePartialeScript = () => {
 
 		// find before node span 
 		const $elBefore = ev.target.previousElementSibling;
-		debugger
+		
 		let subjoinLikes = Number($elBefore.innerText) + 1;
 		$elBefore.innerText = subjoinLikes;
 
