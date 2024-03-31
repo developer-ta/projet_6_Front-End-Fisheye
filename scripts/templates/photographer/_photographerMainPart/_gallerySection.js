@@ -7,7 +7,7 @@ export const _gallerySection = (sortedMediasData, phData) => {
 	const $gallery = document.querySelector('#gallery')
 	$gallery.innerHTML = ''
 
-	console.table(sortedMediasData);
+
 	sortedMediasData.forEach(el => {
 
 		let mediaUrl = `${phData.name.split(' ')[0].includes('-')
@@ -30,7 +30,7 @@ export const _gallerySection = (sortedMediasData, phData) => {
 
 			mediaUrl += `${el.video}`
 			video += mediaUrl
-			$media_html += `<video  controls ><source src="${video}"></video>`
+			$media_html += `<video><source src="${video}"></video>`
 		}
 
 		//add like partiale view
@@ -43,7 +43,7 @@ export const _gallerySection = (sortedMediasData, phData) => {
 
 	});
 	//add event for open and close modal lightbox
-	const $modalImgs = document.querySelectorAll('.galleryImg-container img, video')
+	const $modalImgs = document.querySelectorAll('.galleryImg-container > img, video')
 	$modalImgs.forEach($imgTag => $imgTag.addEventListener("click", () => _lightboxModal()))
 };
 

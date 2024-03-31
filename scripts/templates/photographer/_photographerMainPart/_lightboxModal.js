@@ -10,7 +10,8 @@ export const _lightboxModal = () => {
 	<span class="next circuit">❯</span>
 	<span class="close">×</span>
 	<div class="img-lightbox">
-	<img class="modal-contend">
+	<img class="modal-contend" >
+	<video  class="video" controls  ><source src=""></video>
 	</div>
 	<h3 id="title_lightbox">Lonesome</h3>
 	</div>`;
@@ -19,41 +20,61 @@ export const _lightboxModal = () => {
 	//Dom el
 	const $lightBox_centenaire = document.querySelector('.lightbox')
 	$lightBox_centenaire.innerHTML = lightBox_template;
-	const $modalImg = document.querySelector('.modal-contend')
+
 	const $gallery = document.getElementById('gallery');
 	const $close_span = $lightBox_centenaire.querySelector('.close')
 	const $previous_span = $lightBox_centenaire.querySelector('.previous')
 	const $next_span = $lightBox_centenaire.querySelector('.next')
-	const $imgList = document.querySelectorAll("#gallery img");
+	const $mediaList = document.querySelectorAll('.galleryImg-container  > img, .galleryImg-container > video')
+	console.log('$mediaList : ', $mediaList);
+
+
+	//interface media info
+
 
 	//list of src to imgs
 	const _srcList = []
 	//set src img in element Dom
-	for (let i = 0; i < $imgList.length; i++) {
+	for (let i = 0; i < $mediaList.length; i++) {
 
-		const $imgTag = $imgList[i];
+		const mediaInfo = {
+			src: '',
+			tagName: '',
+			imgIndex: 0,
+			photographName: '',
+		}
+		const $mediaTag = $mediaList[i];
+		debugger
+		if ($mediaTag.tagName === 'VIDEO') {
 
-		if ($imgTag.tagName !== 'VIDEO' && $imgTag.src) {
+			mediaInfo.src = $mediaTag.firstChild.src
+			mediaInfo.imgIndex = i
+			$mediaTag.imgIndex = i
+			mediaInfo.tagName = 'video';
+			//mediaInfo.photographName = $mediaTag.photographName;
+			_srcList.push(mediaInfo)
 
-			$imgTag.srcByIndex = $imgTag.src
-			$imgTag.imgIndex = i
-			_srcList.push($imgTag.src)
-			//$imgTag.srcList = _srcList
 
-		} else if ($imgTag.firstChild.src) {
+		} else {
 
-			$imgTag.srcByIndex = $imgTag.firstChild.src
-			$imgTag.imgIndex = i
-			_srcList.push($imgTag.firstChild.src)
-
+			mediaInfo.src = $mediaTag.src
+			mediaInfo.tagName = 'img';
+			mediaInfo.imgIndex = i
+			$mediaTag.imgIndex = i
+			//mediaInfo.photographName = $mediaTag.photographName;
+			_srcList.push(mediaInfo)
 		}
 
-		//action for open lightbox modal
-		$imgTag.addEventListener("click", lightboxHandler)
+		//$lightboxContent.srcList = _srcList
 
+		//action for open lightbox modal
+		$mediaTag.addEventListener("click", lightboxHandler)
 
 	}
+
 	$gallery.srcList = _srcList;
+	console.log('$gallery.srcList : ', $gallery.srcList);
+
 	//action for close lightbox modal
 	$close_span.addEventListener("click", lightboxHandler);
 	//Carousel img
@@ -65,29 +86,60 @@ export const _lightboxModal = () => {
 
 
 const carouselImg = (ev) => {
-
+	debugger;
 	const $currentModalImg = document.querySelector('.modal-contend')
 
+	const $lightboxContent = document.querySelector('.img-lightbox')
+	const $video = document.querySelector('.video')
 	const $gallery = document.getElementById('gallery');
-	const imgList = $gallery.srcList;
-	let imgIndex = $currentModalImg.index;
+	const mediaList = $gallery.srcList;
+	const getIndex = () => {
+		let imgIndex = 0;
+		//video
+		if ($lightboxContent.lastElementChild.style.display == 'block') {
+			imgIndex = $lightboxContent.lastElementChild.index
+		} //img
+		else if ($lightboxContent.firstElementChild.style.display == 'block') {
+			imgIndex = $lightboxContent.firstElementChild.index
+		}
+		// 	//check max length 
+		// 	if ((imgIndex - 1) < 0) { 
+		// 		imgIndex = mediaList.length - 1
+		// 	} else if ((imgIndex + 1) >= mediaList.length) {
+		// 	imgIndex = 0
+		// }
 
-	//check max length 
-	if ((imgIndex - 1) < 0) {
-		imgIndex = imgList.length - 1
-	} else if ((imgIndex + 1) >= imgList.length) {
-		imgIndex = 0
-	}
+		return imgIndex
+	};
+	let index = getIndex();
+
 
 	if (ev.target.classList[0] == 'previous') {
+		debugger
+		if ((index - 1) < 0) {
+			index = mediaList.length
+		} 
+		checkMedia(index - 1, mediaList)
 
-		$currentModalImg.src = imgList[imgIndex - 1]
-		$currentModalImg.index = imgIndex - 1
+		// if ($lightboxContent.lastElementChild.style.display == 'block') {
+		// 	$lightboxContent.lastElementChild.imgIndex
+		// 	$lightboxContent.children.src = mediaList[index - 1]
+
+		// } else if ($currentModalImg.typeTag !== 'img') {
+		// 	//$lightboxContent.innerHTML = `<img class="modal-contend">`
+		// 	$lightboxContent.children.src = mediaList[index - 1]
+		// }
+
+		// $lightboxContent.index = index - 1
 
 	} else if (ev.target.classList[0] == 'next') {
+		if ((index + 1) >= mediaList.length) {
+			index = 0
+		}
+		checkMedia(index + 1, mediaList)
 
-		$currentModalImg.src = imgList[imgIndex + 1]
-		$currentModalImg.index = imgIndex + 1
+		// $currentModalImg.src = mediaList[index + 1]
+		// $currentModalImg.index = index + 1
 	}
 
 }
@@ -103,7 +155,7 @@ export const lightboxHandler = (ev) => {
 	const $modalImg = document.querySelector('.modal-contend')
 
 	const $gallery = document.getElementById('gallery');
-	
+	const mediaList = $gallery.srcList;
 	
 	if ($gallery.style.display !== 'none') {
 
@@ -121,8 +173,37 @@ export const lightboxHandler = (ev) => {
 		$lightBox_centenaire.style.display = 'none'
 	}
 	//img display in modal 
-	const imgUrl = ev.target.src;
-	$modalImg.index = ev.target.imgIndex
-	$modalImg.src = imgUrl;
+	debugger
+	checkMedia(ev.target.imgIndex, mediaList)
+
+
+	// const mediaSrc = ev.target.src;
+	// $modalImg.index = ev.target.imgIndex
+	// $modalImg.src = mediaSrc;
+
+
+}
+
+function checkMedia(imgIndex, mediaList) {
+	debugger
+
+
+	const $lightboxContent = document.querySelector('.img-lightbox')
+
+	let elInfo = mediaList.find(x => x.imgIndex == imgIndex);
+	if (elInfo.tagName === 'video') {
+		$lightboxContent.firstElementChild.style.display = 'none';
+		$lightboxContent.lastElementChild.style.display = 'block';
+		$lightboxContent.lastElementChild.src = elInfo.src
+		$lightboxContent.lastElementChild.index = elInfo.imgIndex
+		return $lightboxContent.lastElementChild
+
+	}
+	$lightboxContent.firstElementChild.style.display = 'block'
+	$lightboxContent.lastElementChild.style.display = 'none';
+	$lightboxContent.firstElementChild.src = elInfo.src
+	$lightboxContent.firstElementChild.index = elInfo.imgIndex
+	return $lightboxContent.firstElementChild 
+
 
 }

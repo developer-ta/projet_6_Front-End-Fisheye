@@ -326,3 +326,10 @@ p:nth-child(3) {
     background-color: #D3573C;
     color: black;
 }
+.video {
+    height: 86rem;
+    object-fit: cover;
+    width: 100%;
+    position: absolute;
+    scale: 0.7;
+}
