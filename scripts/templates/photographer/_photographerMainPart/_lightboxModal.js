@@ -26,6 +26,7 @@ export const _lightboxModal = () => {
 	const $previous_span = $lightBox_centenaire.querySelector('.previous')
 	const $next_span = $lightBox_centenaire.querySelector('.next')
 	const $mediaList = document.querySelectorAll('.galleryImg-container  > img, .galleryImg-container > video')
+	const $titleList = $gallery.querySelectorAll('#title')
 	console.log('$mediaList : ', $mediaList);
 
 
@@ -41,7 +42,7 @@ export const _lightboxModal = () => {
 			src: '',
 			tagName: '',
 			imgIndex: 0,
-			photographName: '',
+			photoName: '',
 		}
 		const $mediaTag = $mediaList[i];
 		debugger
@@ -51,7 +52,7 @@ export const _lightboxModal = () => {
 			mediaInfo.imgIndex = i
 			$mediaTag.imgIndex = i
 			mediaInfo.tagName = 'video';
-			//mediaInfo.photographName = $mediaTag.photographName;
+			mediaInfo.photoName = $titleList[i].textContent;
 			_srcList.push(mediaInfo)
 
 
@@ -61,11 +62,11 @@ export const _lightboxModal = () => {
 			mediaInfo.tagName = 'img';
 			mediaInfo.imgIndex = i
 			$mediaTag.imgIndex = i
-			//mediaInfo.photographName = $mediaTag.photographName;
+			mediaInfo.photoName = $titleList[i].textContent;
 			_srcList.push(mediaInfo)
 		}
 
-		//$lightboxContent.srcList = _srcList
+
 
 		//action for open lightbox modal
 		$mediaTag.addEventListener("click", lightboxHandler)
@@ -87,10 +88,10 @@ export const _lightboxModal = () => {
 
 const carouselImg = (ev) => {
 	debugger;
-	const $currentModalImg = document.querySelector('.modal-contend')
+
 
 	const $lightboxContent = document.querySelector('.img-lightbox')
-	const $video = document.querySelector('.video')
+
 	const $gallery = document.getElementById('gallery');
 	const mediaList = $gallery.srcList;
 	const getIndex = () => {
@@ -102,12 +103,7 @@ const carouselImg = (ev) => {
 		else if ($lightboxContent.firstElementChild.style.display == 'block') {
 			imgIndex = $lightboxContent.firstElementChild.index
 		}
-		// 	//check max length 
-		// 	if ((imgIndex - 1) < 0) { 
-		// 		imgIndex = mediaList.length - 1
-		// 	} else if ((imgIndex + 1) >= mediaList.length) {
-		// 	imgIndex = 0
-		// }
+
 
 		return imgIndex
 	};
@@ -121,16 +117,6 @@ const carouselImg = (ev) => {
 		} 
 		checkMedia(index - 1, mediaList)
 
-		// if ($lightboxContent.lastElementChild.style.display == 'block') {
-		// 	$lightboxContent.lastElementChild.imgIndex
-		// 	$lightboxContent.children.src = mediaList[index - 1]
-
-		// } else if ($currentModalImg.typeTag !== 'img') {
-		// 	//$lightboxContent.innerHTML = `<img class="modal-contend">`
-		// 	$lightboxContent.children.src = mediaList[index - 1]
-		// }
-
-		// $lightboxContent.index = index - 1
 
 	} else if (ev.target.classList[0] == 'next') {
 		if ((index + 1) >= mediaList.length) {
@@ -138,8 +124,6 @@ const carouselImg = (ev) => {
 		}
 		checkMedia(index + 1, mediaList)
 
-		// $currentModalImg.src = mediaList[index + 1]
-		// $currentModalImg.index = index + 1
 	}
 
 }
@@ -152,7 +136,7 @@ export const lightboxHandler = (ev) => {
 	//Dom el
 	const $lightBox_centenaire = document.querySelector('.lightbox')
 
-	const $modalImg = document.querySelector('.modal-contend')
+
 
 	const $gallery = document.getElementById('gallery');
 	const mediaList = $gallery.srcList;
@@ -177,10 +161,6 @@ export const lightboxHandler = (ev) => {
 	checkMedia(ev.target.imgIndex, mediaList)
 
 
-	// const mediaSrc = ev.target.src;
-	// $modalImg.index = ev.target.imgIndex
-	// $modalImg.src = mediaSrc;
-
 
 }
 
@@ -189,13 +169,17 @@ function checkMedia(imgIndex, mediaList) {
 
 
 	const $lightboxContent = document.querySelector('.img-lightbox')
+	const $title_lightbox = document.querySelector('#title_lightbox')
+
 
 	let elInfo = mediaList.find(x => x.imgIndex == imgIndex);
 	if (elInfo.tagName === 'video') {
 		$lightboxContent.firstElementChild.style.display = 'none';
 		$lightboxContent.lastElementChild.style.display = 'block';
 		$lightboxContent.lastElementChild.src = elInfo.src
+		debugger
 		$lightboxContent.lastElementChild.index = elInfo.imgIndex
+		$title_lightbox.textContent = elInfo.photoName
 		return $lightboxContent.lastElementChild
 
 	}
@@ -203,6 +187,7 @@ function checkMedia(imgIndex, mediaList) {
 	$lightboxContent.lastElementChild.style.display = 'none';
 	$lightboxContent.firstElementChild.src = elInfo.src
 	$lightboxContent.firstElementChild.index = elInfo.imgIndex
+	$title_lightbox.textContent = elInfo.photoName
 	return $lightboxContent.firstElementChild 
 
 

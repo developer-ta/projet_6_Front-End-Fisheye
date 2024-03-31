@@ -245,7 +245,6 @@ object-fit: cover;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
     height: 72em;
 }
 
@@ -286,9 +285,16 @@ object-fit: cover;
 }
 
 #title_lightbox {
-    position: relative;
-    right: 35%;
-}
+    position: absolute;
+    left: 15.54%;
+    bottom: 1.86%;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    color: #911C1C;
+    }
 .lightbox {
     margin: auto;
     flex-direction: row;

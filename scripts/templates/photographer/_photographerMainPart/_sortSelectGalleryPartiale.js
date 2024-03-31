@@ -2,14 +2,7 @@ import { _gallerySection } from "./_gallerySection.js";
 
 export const _sortSelectGalleryPartiale = (mediasData, phData) => {
 
-	// let menu_html = `<div>
-	// <label for="menu-tri">Trier par</label>
-	// <select name="menu-tri" id="select_tri">
-	// <option value="Popularité" selected>Popularité</option>
-	// <option value="Date">Date</option>
-	// <option value="Titre">Titre</option>
-	// </select>
-	// </div>`
+
 
 	let menu_html = `  <div>
 	<label for="menu-tri">Trier par</label>
