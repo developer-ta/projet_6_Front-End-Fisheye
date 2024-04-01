@@ -24,13 +24,13 @@ export const _gallerySection = (sortedMediasData, phData) => {
 
 			mediaUrl += `${el.image}`
 			picture += mediaUrl
-			$media_html += `<img src="${picture}">`
+			$media_html += `<img src="${picture}" aria-label="Lilac breasted roller, closeup view">`
 
 		} else if (el.video) {
 
 			mediaUrl += `${el.video}`
 			video += mediaUrl
-			$media_html += `<video><source src="${video}" aria-label="${el.title}"></video>`
+			$media_html += `<video><source src="${video}" aria-label="Lilac breasted roller, closeup view"></video>`
 		}
 
 		//add like partiale view

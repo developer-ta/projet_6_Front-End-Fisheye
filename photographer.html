@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -32,25 +32,24 @@
     <div id="contact_modal">
 			<div class="modal">
 				<header>
-          <h2>Contactez-moi <br>
-            <span>mimi</span>
+          <h2>Contactez-moi
           </h2>
           <!-- onclick="closeModal()" -->
-          <img src="assets/icons/close.svg" class="closeModal" />
+          <img src="assets/icons/close.svg" class="closeModal" role="button" aria-label="Close Contact form " />
         </header>
         <!-- form -->
 				<form>
 					<div>
             <label for="firstName">Prénom</label>
-            <input type="text" name="Prénom" id="firstName">
+            <input type="text" name="Prénom" id="firstName" aria-label="First name">
             <label for="name">nom</label>
-            <input type="text" name="nom" id="name">
+            <input type="text" name="nom" id="name" aria-label="Last name">
             <label for="email">email</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email" aria-label="Email">
             <label for="message">votre message</label>
-            <textarea name="message" id="message" cols="30" rows="10"></textarea>
+            <textarea name="message" id="message" cols="30" rows="10" aria-label="Your message"></textarea>
 					</div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact_button" aria-label="Send">Envoyer</button>
 				</form>
 			</div>
     </div>

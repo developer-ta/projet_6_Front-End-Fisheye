@@ -1,14 +1,14 @@
 import { closeModal } from "./contactForm.js"
 
 function keyDownHandler(event) {
-	event.preventDefault()
+
 	debugger
 	const $lightBox_centenaire = document.querySelector('.lightbox')
 
 	const $previous_span = $lightBox_centenaire.querySelector('.previous')
 	const $next_span = $lightBox_centenaire.querySelector('.next')
 	const $close_span = $lightBox_centenaire.querySelector('.close')
-	const $closeModal = document.querySelector('#contact_modal .closeModal');
+
 	const modal = document.getElementById("contact_modal");
 
 	const eventClick = new Event("click");
@@ -30,6 +30,7 @@ function keyDownHandler(event) {
 		}
 
 	}
+
 
 }
 

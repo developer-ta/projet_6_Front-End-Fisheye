@@ -8,6 +8,6 @@ export const pageBuilder = (MediasData, phData) => {
 
   _formModal();
 
-  document.body.addEventListener("keydown", keyDownHandler);
+  document.addEventListener("keydown", keyDownHandler);
 };
 

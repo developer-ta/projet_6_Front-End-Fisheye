@@ -6,11 +6,11 @@ export const _lightboxModal = () => {
 	//html 
 	const lightBox_template = `  
 	<div id="dialog" aria-label="image closeup view">
-	<span class="previous circuit">❮</span>
-	<span class="next circuit">❯</span>
-	<span class="close">×</span>
+	<span class="previous circuit" aria-label="Previous image">❮</span>
+	<span class="next circuit" aria-label="Next image">❯</span>
+	<span class="close" aria-label="Close dialog">×</span>
 	<div class="img-lightbox">
-	<img class="modal-contend" >
+	<img class="modal-contend" alt='Lilac breasted roller'>
 	<video  class="video" controls  ><source src=""></video>
 	</div>
 	<h3 id="title_lightbox">Lonesome</h3>

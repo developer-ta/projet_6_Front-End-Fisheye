@@ -125,6 +125,7 @@ class FormValidator {
 		formDiv.style.display = 'flex'
 		header_el.style.display = 'block'
 		form.removeChild(succeed_el)
+
 		submit_btn.textContent = 'Envoyer'
 
 		document.querySelector('#contact_modal #name').value = '';
@@ -144,6 +145,10 @@ class FormValidator {
 	initForm() {
 		//el Dom
 		const $submit_btn = document.querySelector('form .contact_button')
+		const $contact_modal = document.querySelector('#contact_modal')
+		const $detail_container = document.querySelector('.detail-container')
+		let namePh = $detail_container.firstChild.textContent
+		$contact_modal.setAttribute("aria-labelledby", namePh)
 
 		$submit_btn.addEventListener('click', (ev) => {
 			ev.preventDefault();
@@ -168,6 +173,8 @@ class FormValidator {
 				$header_el.style.display = 'none'
 				$form.insertAdjacentHTML('afterbegin', `<h3 class='succeed'>Merci de votre suggestion</h3>`)
 				$submit_btn.textContent = 'fermé'
+				$submit_btn.setAttribute("aria-label", 'Close Contact form') 
+
 
 				console.log('canSandData: ', canSandData);
 
