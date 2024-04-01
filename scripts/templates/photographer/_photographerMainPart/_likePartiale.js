@@ -5,7 +5,7 @@ export const _likePartialeTemplate = (mediaData) => {
 	<p id="title">${mediaData.title}</p>
 	<p id="like">
 	<span class="like-amount">${mediaData.likes}</span>
-	<i class="fa-solid fa-heart hart-like"></i>
+	<i class="fa-solid fa-heart hart-like" aria-label="likes"></i>
 	</p>
 	</div></div>`
 

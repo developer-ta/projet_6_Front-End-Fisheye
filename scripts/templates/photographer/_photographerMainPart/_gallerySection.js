@@ -30,7 +30,7 @@ export const _gallerySection = (sortedMediasData, phData) => {
 
 			mediaUrl += `${el.video}`
 			video += mediaUrl
-			$media_html += `<video><source src="${video}"></video>`
+			$media_html += `<video><source src="${video}" aria-label="${el.title}"></video>`
 		}
 
 		//add like partiale view

@@ -22,8 +22,8 @@ header {
 }
 
 h1 {
-    color: #901C1C;
-    margin-right: 100px;
+    color: #D3573C;
+    font-size: 36px;
 }
 
 .logo {
@@ -48,7 +48,7 @@ h1 {
 }
 
 /* h2, */
-.photographer_section article h2 {
+.photographer_section article h1 {
     color: #D3573C;
     font-size: 36px;
 }
@@ -338,4 +338,14 @@ p:nth-child(3) {
     width: 100%;
     position: absolute;
     scale: 0.7;
+}
+#city {
+
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 17px;
+    text-align: center;
+    color: #901C1C;
 }

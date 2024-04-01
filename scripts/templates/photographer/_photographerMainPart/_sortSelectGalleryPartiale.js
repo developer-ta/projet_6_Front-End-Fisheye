@@ -3,13 +3,14 @@ import { _gallerySection } from "./_gallerySection.js";
 export const _sortSelectGalleryPartiale = (mediasData, phData) => {
 
 
-
+	// <span id="open-options" role="button" aria-expanded="false" aria-haspopup="listbox" tabindex="0">
+	// <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
 	let menu_html = `  <div>
 	<label for="menu-tri">Trier par</label>
-	<div name="menu-tri"id="select_tri">
-	  <div class="popularity" id="select">Popularité<span id='open-options'><i class="fa-solid fa-chevron-down"></i></span></div>
-	  <div class="date">Date</div>
-	  <div class="title">Titre</div>
+	<div name="menu-tri" id="select_tri" aria-label="Order by" aria-describedby="menu">
+	<div class="popularity" id="select" role="option" aria-selected="true">Popularité<span id='open-options' role="button" aria-haspopup="listbox" aria-expanded="false" ><i class="fa-solid fa-chevron-down" ></i></span></div>
+	  <div class="date" role="option" aria-selected='false'>Date</div>
+	  <div class="title" role="option" aria-selected="false">Titre</div>
 	</div> 
   </div>`
 

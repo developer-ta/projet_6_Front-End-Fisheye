@@ -11,13 +11,15 @@ export function photographerTemplate(data) {
 
     //template index
     let html = `
-<div class="img-container"><img src="${picture}"></div>
-<h2>${name}</h2>
-<div class="detail-container">
-<h4>${city},${country}</h4>
-<p>${tagline}</p>
-<p>${price}€/jour</p>
-</div>`;
+    <div class="img-container" role="Link" aria-label="${name}">
+    <img src="${picture}" alt="${name}">
+    </div>
+  <h1>${name}</h1>
+  <div class="detail-container">
+    <p id='city'>${city},${country}</p>
+    <p>${tagline}</p>
+    <p>${price}€/jour</p>
+  </div>`;
     $article.innerHTML = html;
 
     if (location.pathname === '/index.html' || location.pathname === '/') {
