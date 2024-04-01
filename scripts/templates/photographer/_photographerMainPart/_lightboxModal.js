@@ -81,14 +81,14 @@ export const _lightboxModal = () => {
 	//Carousel img
 	$previous_span.addEventListener("click", carouselImg);
 	$next_span.addEventListener("click", carouselImg);
-	document.body.addEventListener("keydown", keyDownHandler);
+
 
 
 };
 
 
 const carouselImg = (ev) => {
-	;
+
 
 
 	const $lightboxContent = document.querySelector('.img-lightbox')
@@ -153,13 +153,13 @@ export const lightboxHandler = (ev) => {
 	if ($lightBox_centenaire.style.display !== 'flex') {
 
 		$lightBox_centenaire.style.display = 'flex'
+		//img display in modal
+
+		checkMedia(ev.target.imgIndex, mediaList)
 	} else {
 
 		$lightBox_centenaire.style.display = 'none'
 	}
-	//img display in modal
-
-	checkMedia(ev.target.imgIndex, mediaList)
 
 
 
@@ -168,12 +168,12 @@ export const lightboxHandler = (ev) => {
 function checkMedia(imgIndex, mediaList) {
 	debugger
 
-	const elementInfo = mediaList.find(x => x.imgIndex == imgIndex);
+	let elementInfo = null;
 
 	const $lightboxContent = document.querySelector('.img-lightbox')
 	const $title_lightbox = document.querySelector('#title_lightbox')
 
-
+	elementInfo = mediaList.find(x => x.imgIndex === imgIndex);
 	if (elementInfo.tagName === 'video') {
 		$lightboxContent.firstElementChild.style.display = 'none';
 		$lightboxContent.lastElementChild.style.display = 'block';
@@ -194,27 +194,5 @@ function checkMedia(imgIndex, mediaList) {
 
 }
 
-function keyDownHandler(event) {
-	event.preventDefault()
-	debugger
-	const $lightBox_centenaire = document.querySelector('.lightbox')
 
-	const $previous_span = $lightBox_centenaire.querySelector('.previous')
-	const $next_span = $lightBox_centenaire.querySelector('.next')
-	const $close_span = $lightBox_centenaire.querySelector('.close')
-	const eventClick = new Event("click");
-	if ($lightBox_centenaire.style.display = 'flex') {
-		if (event.key == 'ArrowLeft') {
-			$previous_span.dispatchEvent(eventClick)
-		}
-		else if (event.key == 'ArrowRight') {
-			$next_span.dispatchEvent(eventClick)
-		}
-		else if (event.key == 'Escape') {
-			$close_span.dispatchEvent(eventClick)
-
-		}
-	}
-
-}
 
